@@ -154,7 +154,8 @@ push_swap/
 ### 参考資料
 
 - 42 subject: push_swap
-- Qiita: [push_swap で使われる Radix sort の解説](https://qiita.com/tommyecguitar/items/3c1897bceda4a06beef2)
+- Qiita: [Radix sort の解説](https://qiita.com/tommyecguitar/items/3c1897bceda4a06beef2)
+- Tukumolog: [Radix Sort 入門](https://tukumolog.com/radix-sort-introduction/)
 
 ### AI の使用について
 
