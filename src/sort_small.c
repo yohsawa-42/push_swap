@@ -35,6 +35,8 @@ static int	find_min_pos(t_stack *a)
 
 static void	sort_three(t_stack *a)
 {
+	if (a->data[0] < a->data[1] && a->data[1] < a->data[2])
+		return ;
 	if (a->data[0] > a->data[1] && a->data[0] < a->data[2])
 		sa(a);
 	else if (a->data[0] > a->data[1] && a->data[1] > a->data[2])
@@ -44,7 +46,8 @@ static void	sort_three(t_stack *a)
 	}
 	else if (a->data[0] > a->data[1] && a->data[1] < a->data[2])
 		ra(a);
-	else if (a->data[0] < a->data[1] && a->data[0] < a->data[2])
+	else if (a->data[0] < a->data[1] && a->data[1] > a->data[2]
+		&& a->data[0] < a->data[2])
 	{
 		sa(a);
 		ra(a);
