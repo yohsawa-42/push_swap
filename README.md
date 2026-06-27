@@ -50,6 +50,23 @@ pa
 
 出力される各行は、スタックに対して実行すべき操作を表します。
 
+### Strategy selector
+
+先頭の引数に selector を指定すると、使用するソート方針を切り替えられます。
+
+```sh
+./push_swap --simple 4 1 3 2
+./push_swap --complex 4 1 3 2
+./push_swap --adaptive 4 1 3 2
+```
+
+- `--simple`: `selection_sort` を使用する
+- `--complex`: `radix_sort` を使用する
+- `--adaptive`: 入力の disorder を計算し、状態に応じて内部手法を選ぶ
+
+selector を指定しない場合も、現在の実装では adaptive sort を使います。
+ただし、要素数が `5` 以下の場合は selector に関係なく小規模入力用の個別ソートを優先します。
+
 ### エラー処理
 
 以下のような入力では `Error` を標準エラー出力へ表示し、終了します。
@@ -150,6 +167,7 @@ Low disorder では `selection_sort` を使います。
 圧縮後の値が `0..n-1` になることを利用し、`0`, `1`, `2` ... を順番に探して上へ回し、`b` に送ります。
 各 target について位置探索と回転が最大 `O(n)`、それを `n` 回行うため、Push_swap 操作モデルでの上限は `O(n^2)` です。
 追加メモリは stack `b` を除けば `O(1)` です。
+`--simple` selector は、この `selection_sort` を明示的に選択するためのオプションです。
 
 Medium disorder では、最終的には `chunk_sort` を使う予定です。
 `sqrt(n)` 個程度の chunk に分け、各 chunk の値を `b` に送りながら整列しやすい位置へ回す設計にします。
@@ -160,6 +178,7 @@ High disorder では `radix_sort` を使います。
 座標圧縮後の最大値は `n - 1` なので、必要なビット数は `log n` です。
 各ビットごとに全要素を一度ずつ処理するため、Push_swap 操作モデルでの上限は `O(n log n)` です。
 追加メモリは stack `b` を除けば `O(1)` です。
+`--complex` selector は、この `radix_sort` を明示的に選択するためのオプションです。
 
 ## Project Structure
 
@@ -175,8 +194,7 @@ push_swap/
 │   ├── sort_small.c
 │   ├── utils.c
 │   └── operations/
-├── stack_utils/
-└── ft_printf/
+└── stack_utils/
 ```
 
 ## Resources
@@ -185,6 +203,7 @@ push_swap/
 
 - 42 subject: push_swap
 - Qiita: [push_swap で使われる Radix sort の解説](https://qiita.com/tommyecguitar/items/3c1897bceda4a06beef2)
+- GeeksforGeeks: [Selection Sort Algorithm](https://www.geeksforgeeks.org/dsa/selection-sort-algorithm-2/)
 
 ### AI の使用について
 
