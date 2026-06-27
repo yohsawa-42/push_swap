@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/25 16:03:48 by msumiji          ###   ########.fr       */
+/*   Created: 2026/06/27 18:54:54 by yohsawa           #+#    #+#             */
+/*   Updated: 2026/06/27 18:55:09 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_max_bits(int size)
 	return (bits);
 }
 
-static void	radix_sort(t_stack *a, t_stack *b)
+void	radix_sort(t_stack *a, t_stack *b)
 {
 	int	i;
 	int	bit;
@@ -49,15 +49,4 @@ static void	radix_sort(t_stack *a, t_stack *b)
 			pa(a, b);
 		bit++;
 	}
-}
-
-int	sort_stack(t_stack *a, t_stack *b)
-{
-	if (!compress_stack(a))
-		return (0);
-	if (a->size <= 5)
-		sort_small(a, b);
-	else
-		radix_sort(a, b);
-	return (1);
 }

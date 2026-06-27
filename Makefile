@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+         #
+#    By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/02 00:00:00 by yohsawa           #+#    #+#              #
-#    Updated: 2026/06/26 16:51:12 by msumiji          ###   ########.fr        #
+#    Updated: 2026/06/27 18:36:57 by yohsawa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,18 +21,19 @@ FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
 SRCS = \
 	src/main.c \
-	src/libft.c \
 	src/compress.c \
-	src/sort.c \
-	src/sort_small.c \
+	src/sort/sort.c \
+	src/sort/selection_sort.c \
+	src/sort/radix_sort.c \
+	src/sort/sort_small.c \
 	src/utils.c \
 	src/operations/push.c \
-	src/operations/reverce_rotate.c \
+	src/operations/reverse_rotate.c \
 	src/operations/rotate.c \
 	src/operations/swap.c \
-	stack_utils/stack_init.c \
-	stack_utils/stack_check.c \
-	stack_utils/stack_validate.c \
+	src/stack_utils/stack_init.c \
+	src/stack_utils/stack_check.c \
+	src/stack_utils/stack_validate.c \
 
 OBJS = $(SRCS:.c=.o)
 

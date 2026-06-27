@@ -131,6 +131,36 @@ Radix sort を選んだ理由は以下です。
 この課題では絶対的な最短手順を常に求めることよりも、制約内で安定して正しい操作列を出すことが重要です。
 そのため、本実装では小規模入力では操作数を抑える専用処理を使い、大きな入力では予測しやすく堅牢な Radix sort を使う方針にしています。
 
+### 4. Disorder による Adaptive sort
+
+`--adaptive` が指定された場合、または selector が指定されていない場合は、ソート前の `stack a` から disorder を計算して内部手法を切り替えます。
+disorder は、すべての組 `(i, j)` について `i < j` かつ `a[i] > a[j]` となる inversion の割合です。
+完全に整列済みなら `0`、逆順に近いほど `1` に近づきます。
+
+disorder は move を出す前、かつ座標圧縮の前に測定します。
+大小関係だけを見るため、圧縮前でも圧縮後でも値は同じになりますが、subject の要件に合わせて初期 stack に対して計算しています。
+
+Adaptive sort の閾値は subject の regime に合わせ、以下のようにしています。
+
+- Low disorder: `disorder < 0.2`
+- Medium disorder: `0.2 <= disorder < 0.5`
+- High disorder: `disorder >= 0.5`
+
+Low disorder では `selection_sort` を使います。
+圧縮後の値が `0..n-1` になることを利用し、`0`, `1`, `2` ... を順番に探して上へ回し、`b` に送ります。
+各 target について位置探索と回転が最大 `O(n)`、それを `n` 回行うため、Push_swap 操作モデルでの上限は `O(n^2)` です。
+追加メモリは stack `b` を除けば `O(1)` です。
+
+Medium disorder では、最終的には `chunk_sort` を使う予定です。
+`sqrt(n)` 個程度の chunk に分け、各 chunk の値を `b` に送りながら整列しやすい位置へ回す設計にします。
+chunk 数と chunk 幅をどちらも `sqrt(n)` 程度に抑えることで、探索と回転の合計上限を `O(n sqrt(n))` にする方針です。
+現在の実装では `chunk_sort(a, b);` の呼び出しをコメントアウトし、完成までの fallback として `radix_sort` を呼んでいます。
+
+High disorder では `radix_sort` を使います。
+座標圧縮後の最大値は `n - 1` なので、必要なビット数は `log n` です。
+各ビットごとに全要素を一度ずつ処理するため、Push_swap 操作モデルでの上限は `O(n log n)` です。
+追加メモリは stack `b` を除けば `O(1)` です。
+
 ## Project Structure
 
 ```txt

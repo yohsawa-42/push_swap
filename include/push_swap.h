@@ -46,32 +46,45 @@ void	ra(t_stack *a);
 void	rb(t_stack *b);
 void	rr(t_stack *a, t_stack *b);
 
-// src/operations/reverce_rotate.c
+// src/operations/reverse_rotate.c
 void	rra(t_stack *a);
 void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
 
-// src/utils.h
+// src/utils.c
 int		ft_atoi(const char *nptr);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	print_error(void);
 void	free_stack(t_stack *stack);
 
-// src/sort.c
-int		sort_stack(t_stack *a, t_stack *b);
+// src/compress.c
 int		compress_stack(t_stack *a);
+
+// src/sort/sort.c
+int		sort_stack(t_stack *a, t_stack *b, t_benchmark *flag);
+
+// src/sort/selection_sort.c
+void	selection_sort(t_stack *a, t_stack *b);
+
+// src/sort/radix_sort.c
+void	radix_sort(t_stack *a, t_stack *b);
+
+// src/sort/sort_small.c
 void	sort_small(t_stack *a, t_stack *b);
 
-// stack_utils/stack_init.c
+// src/stack_utils/stack_init.c
 int		init_stack_a(t_stack *a, int ac, char **av, int n);
 int		init_stack_b(t_stack *b, int size);
 
-// stack_utils/stack_check.c
+// src/stack_utils/stack_check.c
 int		is_sorted(t_stack *stack);
-int		is_valid_input(int ac, char **av, int n);
 int		has_duplicate(t_stack *stack);
+
+// src/stack_utils/stack_validate.c
+int		is_valid_input(int ac, char **av, int n);
+
+// src/main.c
 int		get_bench(int ac, char **av, t_benchmark *flag);
 int		strategy_selector(char *c, t_benchmark *flag);
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

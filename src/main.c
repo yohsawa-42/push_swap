@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:53:30 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/27 15:51:16 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/06/27 18:41:49 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,36 @@ static int	exit_error(t_stack *a, t_stack *b)
 	print_error();
 	return (1);
 }
+
+static void	init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag)
+{
+	a->data = NULL;
+	b->data = NULL;
+	flag->bench = 0;
+	flag->simple = 0;
+	flag->medium = 0;
+	flag->complex = 0;
+	flag->adaptive = 0;
+}
+
 int	strategy_selector(char *c, t_benchmark *flag)
 {
-	if (ft_strncmp(c,"--simple",8) == 0)
+	if (ft_strncmp(c, "--simple", 9) == 0)
 	{
 		flag->simple = 1;
 		return (1);
 	}
-	if (ft_strncmp(c,"--medium",8) == 0)
+	if (ft_strncmp(c, "--medium", 9) == 0)
 	{
 		flag->medium = 1;
 		return (1);
 	}
-	if (ft_strncmp(c,"--complex",9) == 0)
+	if (ft_strncmp(c, "--complex", 10) == 0)
 	{
 		flag->complex = 1;
 		return (1);
 	}
-	if (ft_strncmp(c,"--adaptive",10) == 0)
+	if (ft_strncmp(c, "--adaptive", 11) == 0)
 	{
 		flag->adaptive = 1;
 		return (1);
@@ -49,7 +61,7 @@ int	get_bench(int ac, char **av, t_benchmark *flag)
 	int	i;
 
 	i = 1;
-	if (ft_strncmp(av[i],"--bench",7) == 0)
+	if (ft_strncmp(av[i], "--bench", 8) == 0)
 	{
 		flag->bench = 1;
 		i++;
@@ -65,14 +77,14 @@ int	get_bench(int ac, char **av, t_benchmark *flag)
 
 int	main(int ac, char **av)
 {
-	t_stack	a;
-	t_stack	b;
-	int	n;
-	t_benchmark flag = {0};
+	t_stack		a;
+	t_stack		b;
+	int			n;
+	t_benchmark	flag;
+
 	if (ac == 1)
 		return (0);
-	a.data = NULL;
-	b.data = NULL;
+	init_benchmark(&a, &b, &flag);
 	n = get_bench(ac, av, &flag);
 	if (!is_valid_input(ac, av, n) || !init_stack_a(&a, ac, av, n))
 	{
@@ -81,7 +93,7 @@ int	main(int ac, char **av)
 	}
 	if (has_duplicate(&a) || !init_stack_b(&b, a.size))
 		return (exit_error(&a, &b));
-	if (!is_sorted(&a) && !sort_stack(&a, &b))
+	if (!is_sorted(&a) && !sort_stack(&a, &b, &flag))
 		return (exit_error(&a, &b));
 	free_stack(&a);
 	free_stack(&b);
