@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+         #
+#    By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/02 00:00:00 by yohsawa           #+#    #+#              #
-#    Updated: 2026/06/13 17:43:55 by yohsawa          ###   ########.fr        #
+#    Updated: 2026/06/26 16:51:12 by msumiji          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
 SRCS = \
 	src/main.c \
+	src/libft.c \
 	src/compress.c \
 	src/sort.c \
 	src/sort_small.c \

@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:53:30 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/21 17:15:48 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/06/27 15:51:16 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int	init_stack_b(t_stack *b, int size)
-{
-	b->size = 0;
-	b->data = malloc(sizeof(int) * size);
-	if (!b->data)
-		return (0);
-	return (1);
-}
 
 static int	exit_error(t_stack *a, t_stack *b)
 {
@@ -28,17 +19,62 @@ static int	exit_error(t_stack *a, t_stack *b)
 	print_error();
 	return (1);
 }
+int	strategy_selector(char *c, t_benchmark *flag)
+{
+	if (ft_strncmp(c,"--simple",8) == 0)
+	{
+		flag->simple = 1;
+		return (1);
+	}
+	if (ft_strncmp(c,"--medium",8) == 0)
+	{
+		flag->medium = 1;
+		return (1);
+	}
+	if (ft_strncmp(c,"--complex",9) == 0)
+	{
+		flag->complex = 1;
+		return (1);
+	}
+	if (ft_strncmp(c,"--adaptive",10) == 0)
+	{
+		flag->adaptive = 1;
+		return (1);
+	}
+	return (0);
+}
+
+int	get_bench(int ac, char **av, t_benchmark *flag)
+{
+	int	i;
+
+	i = 1;
+	if (ft_strncmp(av[i],"--bench",7) == 0)
+	{
+		flag->bench = 1;
+		i++;
+		if (ac <= i)
+			return (0);
+	}
+	if (strategy_selector(av[i], flag))
+		i++;
+	if (ac <= i)
+		return (0);
+	return (i);
+}
 
 int	main(int ac, char **av)
 {
 	t_stack	a;
 	t_stack	b;
-
+	int	n;
+	t_benchmark flag = {0};
 	if (ac == 1)
 		return (0);
 	a.data = NULL;
 	b.data = NULL;
-	if (!is_valid_input(ac, av) || !init_stack_a(&a, ac, av))
+	n = get_bench(ac, av, &flag);
+	if (!is_valid_input(ac, av, n) || !init_stack_a(&a, ac, av, n))
 	{
 		print_error();
 		return (1);

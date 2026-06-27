@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:40:02 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/13 17:44:14 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/06/27 10:44:01 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ typedef struct s_stack
 	int	*data;
 	int	size;
 }		t_stack;
+
+typedef struct s_benchmark
+{
+	int	bench;
+	int	simple;
+	int	medium;
+	int	complex;
+	int	adaptive;
+}		t_benchmark;
 
 // src/operations/swap.c
 void	sa(t_stack *a);
@@ -53,11 +62,16 @@ int		compress_stack(t_stack *a);
 void	sort_small(t_stack *a, t_stack *b);
 
 // stack_utils/stack_init.c
-int		init_stack_a(t_stack *a, int ac, char **av);
+int		init_stack_a(t_stack *a, int ac, char **av, int n);
+int		init_stack_b(t_stack *b, int size);
 
 // stack_utils/stack_check.c
 int		is_sorted(t_stack *stack);
-int		is_valid_input(int ac, char **av);
+int		is_valid_input(int ac, char **av, int n);
 int		has_duplicate(t_stack *stack);
+int		get_bench(int ac, char **av, t_benchmark *flag);
+int		strategy_selector(char *c, t_benchmark *flag);
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

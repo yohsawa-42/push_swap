@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_init.c                                       :+:      :+:    :+:   */
+/*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/13 17:32:06 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/27 10:43:11 by msumiji          ###   ########.fr       */
+/*   Created: 2026/06/25 16:52:22 by msumiji           #+#    #+#             */
+/*   Updated: 2026/06/25 16:52:29 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	init_stack_a(t_stack *a, int ac, char **av, int n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	i;
+	size_t	i;
 
-	a->size = ac - n;
-	a->data = malloc(sizeof(int) * a->size);
-	if (!a->data)
-		return (0);
 	i = 0;
-	while (i < a->size)
+	while (s1[i] == s2[i] && i < n)
 	{
-		a->data[i] = ft_atoi(av[i + n]);
-		i++;
+		if (s1[i] == '\0' && s2[i] == '\0')
+			return (0);
+		else
+			i++;
 	}
-	return (1);
-}
-
-int	init_stack_b(t_stack *b, int size)
-{
-	b->size = 0;
-	b->data = malloc(sizeof(int) * size);
-	if (!b->data)
+	if (i == n)
 		return (0);
-	return (1);
+	else
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
