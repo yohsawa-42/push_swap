@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:59:03 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/02 16:21:21 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/06/28 19:06:23 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,53 @@ void	pb(t_stack *a, t_stack *b)
 		return ;
 	push_stack(b, a);
 	write(1, "pb\n", 3);
+}
+
+void	ra_and_pb(t_stack *a, t_stack *b, int i)
+{
+	int j;
+	j = 0;
+	if (i <= a->size / 2)
+	{
+		while (j < i)
+		{
+			ra(a);
+			j++;
+		}
+		pb(a, b);
+	}
+	else
+	{
+		while (j < a->size - i)
+		{
+			rra(a);
+			j++;
+		}
+		pb(a, b);
+	}
+}
+
+void	rb_and_pa(t_stack *a, t_stack *b, int i)
+{
+	int	j;
+
+	j = 0;
+	if (i <= b->size / 2)
+	{
+		while (j < i)
+		{
+			rb(b);
+			j++;
+		}
+		pa(a, b);
+	}
+	else
+	{
+		while (j < b->size - i)
+		{
+			rrb(b);
+			j++;
+		}
+		pa(a, b);
+	}
 }

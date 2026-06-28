@@ -6,42 +6,43 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:11:10 by msumiji           #+#    #+#             */
-/*   Updated: 2026/06/28 18:15:24 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/06/28 19:05:42 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-#define chunksize 11
+#define chunksize 5
 
-static void ra_and_pb(t_stack *a, t_stack *b, int i)
+static void	push_target(t_stack *a, t_stack *b, int target, int rotate)
 {
-	int j;
+	int	j;
+
 	j = 0;
-	if (i <= a->size / 2)
+	while (j <= a->size / 2)
 	{
-		while (j < i)
+		if (a->data[j] == target)
 		{
-			ra(a);
-			j++;
+			ra_and_pb(a, b, j);
+			if (rotate)
+				rb(b);
+			return ;
 		}
-		pb(a, b);
-	}
-	else
-	{
-		while (j < a->size - i)
+		if (a->data[a->size - j - 1] == target)
 		{
-			rra(a);
-			j++;
+			ra_and_pb(a, b, a->size - j - 1);
+			if (rotate)
+				rb(b);
+			return ;
 		}
-		pb(a, b);
+		j++;
 	}
 }
+
 
 static void	a_to_b(t_stack *a, t_stack *b, int *data)
 {
 	int	i;
-	int	j;
 	int n;
 	int size;
 
@@ -52,55 +53,14 @@ static void	a_to_b(t_stack *a, t_stack *b, int *data)
 		i = n * chunksize;
 		while (i < (n + 1) * chunksize && i < size)
 		{
-			j = 0;
-			while (j <= a->size / 2)
-			{
-				if (a->data[j] == data[i])
-				{
-					ra_and_pb(a, b, j);
-					if (i < n * chunksize + chunksize / 2)
-						rb(b);
-					break;
-				}
-				if (a->data[a->size - j - 1] == data[i])
-				{
-					ra_and_pb(a, b, a->size - j - 1);
-					if (i < n * chunksize + chunksize / 2)
-						rb(b);
-					break;
-				}
-				j++;
-			}
+			push_target(a, b, data[i],
+				i < n *chunksize + chunksize / 2);
 			i++;
 		}
 		n++;
 	}
 }
 
-static void	rb_and_pa(t_stack *a, t_stack *b, int i)
-{
-	int	j;
-
-	j = 0;
-	if (i <= b->size / 2)
-	{
-		while (j < i)
-		{
-			rb(b);
-			j++;
-		}
-		pa(a, b);
-	}
-	else
-	{
-		while (j < b->size - i)
-		{
-			rrb(b);
-			j++;
-		}
-		pa(a, b);
-	}
-}
 static void b_to_a(t_stack *a, t_stack *b, int *data)
 {
 	int	i;
@@ -129,7 +89,6 @@ static void b_to_a(t_stack *a, t_stack *b, int *data)
 		i++;
 	}
 }
-#include <stdio.h>
 
 void	chunk_sort(t_stack *a, t_stack *b)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:40:02 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/27 19:52:14 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/06/28 19:09:28 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	ss(t_stack *a, t_stack *b);
 // src/operations/push.c
 void	pa(t_stack *a, t_stack *b);
 void	pb(t_stack *a, t_stack *b);
+void	ra_and_pb(t_stack *a, t_stack *b, int i);
+void	rb_and_pa(t_stack *a, t_stack *b, int i);
 
 // src/operations/rotate.c
 void	ra(t_stack *a);
@@ -58,6 +60,10 @@ void	free_stack(t_stack *stack);
 
 // src/compress.c
 int		compress_stack(t_stack *a);
+void	sort_array(int *arr, int size);
+
+// src/chunk_sort.c
+void	chunk_sort(t_stack *a, t_stack *b);
 
 // src/sort/sort.c
 int		sort_stack(t_stack *a, t_stack *b, t_benchmark *flag);
