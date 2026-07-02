@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+         #
+#    By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/02 00:00:00 by yohsawa           #+#    #+#              #
-#    Updated: 2026/06/27 19:52:17 by yohsawa          ###   ########.fr        #
+#    Updated: 2026/07/02 19:01:23 by msumiji          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS = \
 	src/sort/selection_sort.c \
 	src/sort/radix_sort.c \
 	src/sort/sort_small.c \
+	src/sort/chunk_sort.c \
 	src/utils.c \
 	src/operations/push.c \
 	src/operations/reverse_rotate.c \
@@ -31,6 +32,11 @@ SRCS = \
 	src/stack_utils/stack_init.c \
 	src/stack_utils/stack_check.c \
 	src/stack_utils/stack_validate.c \
+	src/printf/ft_printf.c \
+	src/printf/print_char.c \
+	src/printf/print_int.c \
+	src/printf/print_str.c \
+	src/printf/print_double.c \
 
 OBJS = $(SRCS:.c=.o)
 

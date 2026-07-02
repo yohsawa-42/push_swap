@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/27 19:08:49 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/02 19:00:09 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,24 @@ static double	compute_disorder(t_stack *a)
 	return ((double)mistakes / (double)total_pairs);
 }
 
-static void	adaptive_sort(t_stack *a, t_stack *b, double disorder)
+static void	adaptive_sort(t_stack *a, t_stack *b,
+	double disorder, t_benchmark *flag)
 {
-	if (a->size <= 5)
-		sort_small(a, b);
-	else if (disorder < 0.2)
+	if (disorder < 0.2)
+	{
 		selection_sort(a, b);
-	// else if (disorder < 0.5)
-	// 	chunk_sort(a, b);
+		flag->simple = 1;
+	}
+	else if (disorder < 0.5)
+	{
+		chunk_sort(a, b);
+		flag->medium = 1;
+	}
 	else
+	{
 		radix_sort(a, b);
+		flag->complex = 1;
+	}
 }
 
 int	sort_stack(t_stack *a, t_stack *b, t_benchmark *flag)
@@ -62,11 +70,11 @@ int	sort_stack(t_stack *a, t_stack *b, t_benchmark *flag)
 		sort_small(a, b);
 	else if (flag->simple)
 		selection_sort(a, b);
-	// else if (flag->medium)
-	// 	chunk_sort(a, b);
+	else if (flag->medium)
+		chunk_sort(a, b);
 	else if (flag->complex)
 		radix_sort(a, b);
 	else
-		adaptive_sort(a, b, disorder);
+		adaptive_sort(a, b, disorder, flag);
 	return (1);
 }

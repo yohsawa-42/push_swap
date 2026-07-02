@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:40:02 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/28 19:09:28 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/02 18:42:15 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 typedef struct s_stack
 {
@@ -91,5 +92,12 @@ int		is_valid_input(int ac, char **av, int n);
 // src/main.c
 int		get_bench(int ac, char **av, t_benchmark *flag);
 int		strategy_selector(char *c, t_benchmark *flag);
+
+// src/printf
+int		ft_printf(const char *fmt, ...);
+int		print_char(int n);
+int		print_int(int n);
+int		print_str(char *s);
+int		print_double(double n);
 
 #endif

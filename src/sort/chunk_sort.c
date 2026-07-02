@@ -6,13 +6,13 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:11:10 by msumiji           #+#    #+#             */
-/*   Updated: 2026/06/28 19:05:42 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/02 10:46:57 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-#define chunksize 5
+#define CHUNKSIZE 5
 
 static void	push_target(t_stack *a, t_stack *b, int target, int rotate)
 {
@@ -39,29 +39,28 @@ static void	push_target(t_stack *a, t_stack *b, int target, int rotate)
 	}
 }
 
-
 static void	a_to_b(t_stack *a, t_stack *b, int *data)
 {
 	int	i;
-	int n;
-	int size;
+	int	n;
+	int	size;
 
 	size = a->size;
 	n = 0;
-	while (n <= (size - 1) / chunksize)
+	while (n <= (size - 1) / CHUNKSIZE)
 	{
-		i = n * chunksize;
-		while (i < (n + 1) * chunksize && i < size)
+		i = n * CHUNKSIZE;
+		while (i < (n + 1) * CHUNKSIZE && i < size)
 		{
 			push_target(a, b, data[i],
-				i < n *chunksize + chunksize / 2);
+				i < n * CHUNKSIZE + CHUNKSIZE / 2);
 			i++;
 		}
 		n++;
 	}
 }
 
-static void b_to_a(t_stack *a, t_stack *b, int *data)
+static void	b_to_a(t_stack *a, t_stack *b, int *data)
 {
 	int	i;
 	int	j;
@@ -77,12 +76,12 @@ static void b_to_a(t_stack *a, t_stack *b, int *data)
 			if (b->data[j] == data[size - i - 1])
 			{
 				rb_and_pa(a, b, j);
-				break;
+				break ;
 			}
 			if (b->data[b->size - j - 1] == data[size - i - 1])
 			{
 				rb_and_pa(a, b, b->size - j - 1);
-				break;
+				break ;
 			}
 			j++;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:53:30 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/27 18:41:49 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/02 19:05:29 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,11 @@ int	main(int ac, char **av)
 		return (exit_error(&a, &b));
 	if (!is_sorted(&a) && !sort_stack(&a, &b, &flag))
 		return (exit_error(&a, &b));
+	//if (flag.bench)
+	//{
+	//	if(!print_bench(&a, &b, &flag))
+	//		return (exit_error(&a, &b));
+	//}
 	free_stack(&a);
 	free_stack(&b);
 	return (0);

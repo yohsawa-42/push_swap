@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:59:03 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/28 19:06:23 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/02 10:00:22 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	pb(t_stack *a, t_stack *b)
 
 void	ra_and_pb(t_stack *a, t_stack *b, int i)
 {
-	int j;
+	int	j;
+
 	j = 0;
 	if (i <= a->size / 2)
 	{
