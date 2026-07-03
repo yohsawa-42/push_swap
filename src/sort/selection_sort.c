@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:55:21 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/27 18:55:23 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/03 18:42:58 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	rotate_target_to_top(t_stack *a, int target)
 	}
 }
 
-void	selection_sort(t_stack *a, t_stack *b)
+int	selection_sort(t_stack *a, t_stack *b)
 {
 	int	target;
 	int	size;
@@ -59,4 +59,5 @@ void	selection_sort(t_stack *a, t_stack *b)
 	}
 	while (b->size > 0)
 		pa(a, b);
+	return (1);
 }

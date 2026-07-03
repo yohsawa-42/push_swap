@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:54:54 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/27 18:55:09 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/03 18:42:55 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_max_bits(int size)
 	return (bits);
 }
 
-void	radix_sort(t_stack *a, t_stack *b)
+int	radix_sort(t_stack *a, t_stack *b)
 {
 	int	i;
 	int	bit;
@@ -49,4 +49,5 @@ void	radix_sort(t_stack *a, t_stack *b)
 			pa(a, b);
 		bit++;
 	}
+	return (1);
 }

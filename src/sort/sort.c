@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/03 17:18:37 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 18:43:06 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,12 @@ static double	compute_disorder(t_stack *a)
 	return ((double)mistakes / (double)total_pairs);
 }
 
-<<<<<<< HEAD
-static void	adaptive_sort(t_stack *a, t_stack *b, t_benchmark *flag)
-=======
-static int	adaptive_sort(t_stack *a, t_stack *b,
-	double disorder, t_benchmark *flag)
->>>>>>> b871f14 (07031803)
+static int	adaptive_sort(t_stack *a, t_stack *b, t_benchmark *flag)
 {
 	if (flag->disorder < 0.2)
 	{
-		selection_sort(a, b);
 		flag->simple = 1;
-		return (1);
+		return (selection_sort(a, b));
 	}
 	else if (flag->disorder < 0.5)
 	{
@@ -59,9 +53,8 @@ static int	adaptive_sort(t_stack *a, t_stack *b,
 	}
 	else
 	{
-		radix_sort(a, b);
 		flag->complex = 1;
-		return (1);
+		return (radix_sort(a, b));
 	}
 }
 
@@ -72,23 +65,18 @@ int	sort_stack(t_stack *a, t_stack *b, t_benchmark *flag)
 		return (0);
 	if (a->size <= 5)
 	{
-		sort_small(a, b);
 		flag->small = 1;
+		return (sort_small(a, b));
 	}
 	else if (flag->simple)
-		selection_sort(a, b);
+		return (selection_sort(a, b));
 	else if (flag->medium)
 		return (chunk_sort(a, b));
 	else if (flag->complex)
-		radix_sort(a, b);
+		return (radix_sort(a, b));
 	else
-<<<<<<< HEAD
 	{
 		flag->adaptive = 1;
-		adaptive_sort(a, b, flag);
+		return (adaptive_sort(a, b, flag));
 	}
-=======
-		return (adaptive_sort(a, b, disorder, flag));
->>>>>>> b871f14 (07031803)
-	return (1);
 }

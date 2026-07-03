@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_small.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/03 17:07:07 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 18:43:04 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	push_min_to_b(t_stack *a, t_stack *b)
 	pb(a, b);
 }
 
-void	sort_small(t_stack *a, t_stack *b, t_operation *op)
+int	sort_small(t_stack *a, t_stack *b)
 {
 	if (a->size == 2)
 		sa(a);
@@ -86,4 +86,5 @@ void	sort_small(t_stack *a, t_stack *b, t_operation *op)
 		while (b->size > 0)
 			pa(a, b);
 	}
+	return (1);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print_bench.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 14:29:19 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/03 16:28:24 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 18:46:05 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static char *strategy(t_benchmark *flag)
+static char	*strategy(t_benchmark *flag)
 {
 	if (flag->simple)
 		return ("Simple");
@@ -21,7 +21,7 @@ static char *strategy(t_benchmark *flag)
 	else if (flag->complex)
 		return ("Complex");
 	else if (flag->small)
-		return("Small");
+		return ("Small");
 	else
 		return ("Adaptive");
 }

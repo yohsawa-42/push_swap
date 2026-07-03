@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:15:49 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/03 17:25:21 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 18:42:40 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@ void	ra(t_stack *a)
 {
 	rotate_stack(a);
 	write(1, "ra\n", 3);
-	a->ra += 1;
 }
 
 void	rb(t_stack *b)
 {
 	rotate_stack(b);
 	write(1, "rb\n", 3);
-	b->rb += 1;
 }
 
 void	rr(t_stack *a, t_stack *b)
@@ -48,5 +46,4 @@ void	rr(t_stack *a, t_stack *b)
 	rotate_stack(a);
 	rotate_stack(b);
 	write(1, "rr\n", 3);
-	a->rr += 1;
 }

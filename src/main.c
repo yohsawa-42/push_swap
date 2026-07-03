@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:53:30 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/03 17:18:21 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 18:46:01 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag)
 	flag->medium = 0;
 	flag->complex = 0;
 	flag->adaptive = 0;
+	flag->small = 0;
 	flag->disorder = 1.0;
 }
 
@@ -78,8 +79,8 @@ int	get_bench(int ac, char **av, t_benchmark *flag)
 
 int	main(int ac, char **av)
 {
-	t_stack		a = {0};
-	t_stack		b = {0};
+	t_stack		a;
+	t_stack		b;
 	int			n;
 	t_benchmark	flag;
 

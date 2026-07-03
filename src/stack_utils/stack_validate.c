@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_validate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/06/26 18:20:02 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 18:43:13 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ static int	check_digits(char *str, int i, int sign)
 	while (is_digit(str[i]))
 	{
 		num = num * 10 + (str[i] - '0');
-		if ((sign == 1 && num > 2147483647)
-			|| (sign == -1 && num > 2147483648))
+		if ((sign == 1 && num > 2147483647) || (sign == -1 && num > 2147483648))
 			return (-1);
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:26:15 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/03 17:22:44 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 18:42:38 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@ void	rra(t_stack *a)
 {
 	reverse_rotate_stack(a);
 	write(1, "rra\n", 4);
-	a->rra += 1;
 }
 
 void	rrb(t_stack *b)
 {
 	reverse_rotate_stack(b);
 	write(1, "rrb\n", 4);
-	b->rrb += 1;
 }
 
 void	rrr(t_stack *a, t_stack *b)
@@ -48,5 +46,4 @@ void	rrr(t_stack *a, t_stack *b)
 	reverse_rotate_stack(a);
 	reverse_rotate_stack(b);
 	write(1, "rrr\n", 4);
-	a->rrr += 1;
 }
