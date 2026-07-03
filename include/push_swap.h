@@ -93,7 +93,7 @@ int		compress_stack(t_stack *a);
 void	sort_array(int *arr, int size);
 
 // src/chunk_sort.c
-void	chunk_sort(t_stack *a, t_stack *b);
+int		chunk_sort(t_stack *a, t_stack *b);
 
 // src/sort/sort.c
 int		sort_stack(t_stack *a, t_stack *b, t_benchmark *flag);

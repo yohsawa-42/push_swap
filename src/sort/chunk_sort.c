@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:11:10 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/02 10:46:57 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 18:03:45 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-#define CHUNKSIZE 5
+static int	get_chunk_size(int size)
+{
+	int	chunk_size;
+
+	chunk_size = 1;
+	while (chunk_size <= size / chunk_size)
+		chunk_size++;
+	return (chunk_size);
+}
 
 static void	push_target(t_stack *a, t_stack *b, int target, int rotate)
 {
@@ -24,14 +32,14 @@ static void	push_target(t_stack *a, t_stack *b, int target, int rotate)
 		if (a->data[j] == target)
 		{
 			ra_and_pb(a, b, j);
-			if (rotate)
+			if (rotate && b->size > 1)
 				rb(b);
 			return ;
 		}
 		if (a->data[a->size - j - 1] == target)
 		{
 			ra_and_pb(a, b, a->size - j - 1);
-			if (rotate)
+			if (rotate && b->size > 1)
 				rb(b);
 			return ;
 		}
@@ -39,24 +47,23 @@ static void	push_target(t_stack *a, t_stack *b, int target, int rotate)
 	}
 }
 
-static void	a_to_b(t_stack *a, t_stack *b, int *data)
+static void	a_to_b(t_stack *a, t_stack *b, int *data, int chunk_size)
 {
 	int	i;
-	int	n;
+	int	start;
 	int	size;
 
 	size = a->size;
-	n = 0;
-	while (n <= (size - 1) / CHUNKSIZE)
+	start = 0;
+	while (start < size)
 	{
-		i = n * CHUNKSIZE;
-		while (i < (n + 1) * CHUNKSIZE && i < size)
+		i = start;
+		while (i < start + chunk_size && i < size)
 		{
-			push_target(a, b, data[i],
-				i < n * CHUNKSIZE + CHUNKSIZE / 2);
+			push_target(a, b, data[i], i < start + chunk_size / 2);
 			i++;
 		}
-		n++;
+		start += chunk_size;
 	}
 }
 
@@ -89,7 +96,7 @@ static void	b_to_a(t_stack *a, t_stack *b, int *data)
 	}
 }
 
-void	chunk_sort(t_stack *a, t_stack *b)
+int	chunk_sort(t_stack *a, t_stack *b)
 {
 	int	*data;
 	int	i;
@@ -98,13 +105,16 @@ void	chunk_sort(t_stack *a, t_stack *b)
 	i = 0;
 	size = a->size;
 	data = malloc(sizeof(int) * size);
+	if (!data)
+		return (0);
 	while (i < size)
 	{
 		data[i] = a->data[i];
 		i++;
 	}
 	sort_array(data, size);
-	a_to_b(a, b, data);
+	a_to_b(a, b, data, get_chunk_size(size));
 	b_to_a(a, b, data);
 	free(data);
+	return (1);
 }
