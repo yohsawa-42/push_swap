@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/02 19:00:09 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 17:18:37 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,14 @@ static double	compute_disorder(t_stack *a)
 	return ((double)mistakes / (double)total_pairs);
 }
 
-static void	adaptive_sort(t_stack *a, t_stack *b,
-	double disorder, t_benchmark *flag)
+static void	adaptive_sort(t_stack *a, t_stack *b, t_benchmark *flag)
 {
-	if (disorder < 0.2)
+	if (flag->disorder < 0.2)
 	{
 		selection_sort(a, b);
 		flag->simple = 1;
 	}
-	else if (disorder < 0.5)
+	else if (flag->disorder < 0.5)
 	{
 		chunk_sort(a, b);
 		flag->medium = 1;
@@ -61,13 +60,14 @@ static void	adaptive_sort(t_stack *a, t_stack *b,
 
 int	sort_stack(t_stack *a, t_stack *b, t_benchmark *flag)
 {
-	double	disorder;
-
-	disorder = compute_disorder(a);
+	flag->disorder = compute_disorder(a);
 	if (!compress_stack(a))
 		return (0);
 	if (a->size <= 5)
+	{
 		sort_small(a, b);
+		flag->small = 1;
+	}
 	else if (flag->simple)
 		selection_sort(a, b);
 	else if (flag->medium)
@@ -75,6 +75,9 @@ int	sort_stack(t_stack *a, t_stack *b, t_benchmark *flag)
 	else if (flag->complex)
 		radix_sort(a, b);
 	else
-		adaptive_sort(a, b, disorder, flag);
+	{
+		flag->adaptive = 1;
+		adaptive_sort(a, b, flag);
+	}
 	return (1);
 }

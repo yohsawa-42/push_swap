@@ -6,7 +6,7 @@
 #    By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/02 00:00:00 by yohsawa           #+#    #+#              #
-#    Updated: 2026/07/02 19:01:23 by msumiji          ###   ########.fr        #
+#    Updated: 2026/07/03 14:46:05 by msumiji          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = \
 	src/printf/print_int.c \
 	src/printf/print_str.c \
 	src/printf/print_double.c \
+	src/print_bench.c \
 
 OBJS = $(SRCS:.c=.o)
 

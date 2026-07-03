@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:40:02 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/02 18:42:15 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 17:11:32 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ typedef struct s_stack
 {
 	int	*data;
 	int	size;
+	int	sa;
+	int	sb;
+	int	ss;
+	int	pa;
+	int	pb;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
 }		t_stack;
 
 typedef struct s_benchmark
@@ -30,7 +41,24 @@ typedef struct s_benchmark
 	int	medium;
 	int	complex;
 	int	adaptive;
+	int	small;
+	double	disorder;
 }		t_benchmark;
+
+typedef struct s_operation
+{
+	int	sa;
+	int	sb;
+	int	ss;
+	int	pa;
+	int	pb;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+}		t_operation
 
 // src/operations/swap.c
 void	sa(t_stack *a);
@@ -58,6 +86,7 @@ int		ft_atoi(const char *nptr);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	print_error(void);
 void	free_stack(t_stack *stack);
+int		print_bench(t_benchmark *flag);
 
 // src/compress.c
 int		compress_stack(t_stack *a);
@@ -99,5 +128,8 @@ int		print_char(int n);
 int		print_int(int n);
 int		print_str(char *s);
 int		print_double(double n);
+
+// src/print_bench
+int		print_bench(t_benchmark *flag);
 
 #endif

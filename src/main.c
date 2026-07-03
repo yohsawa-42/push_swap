@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:53:30 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/02 19:05:29 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 17:18:21 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag)
 	flag->medium = 0;
 	flag->complex = 0;
 	flag->adaptive = 0;
+	flag->disorder = 1.0;
 }
 
 int	strategy_selector(char *c, t_benchmark *flag)
@@ -77,8 +78,8 @@ int	get_bench(int ac, char **av, t_benchmark *flag)
 
 int	main(int ac, char **av)
 {
-	t_stack		a;
-	t_stack		b;
+	t_stack		a = {0};
+	t_stack		b = {0};
 	int			n;
 	t_benchmark	flag;
 
@@ -95,11 +96,8 @@ int	main(int ac, char **av)
 		return (exit_error(&a, &b));
 	if (!is_sorted(&a) && !sort_stack(&a, &b, &flag))
 		return (exit_error(&a, &b));
-	//if (flag.bench)
-	//{
-	//	if(!print_bench(&a, &b, &flag))
-	//		return (exit_error(&a, &b));
-	//}
+	if (flag.bench)
+		print_bench(&flag);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);

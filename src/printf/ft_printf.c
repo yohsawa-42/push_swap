@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 18:12:58 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/02 18:53:14 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/03 09:02:57 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@ static int	ewrite(char *c)
 		return (-1);
 	return (1);
 }
-
-//static int	count_digit(unsigned int n)
-//{
-//	int	i;
-
-//	i = 0;
-//	while (n != 0)
-//	{
-//		n = n / 16;
-//		i++;
-//	}
-//	return (i);
-//}
 
 static int	convert(char c, va_list ap)
 {

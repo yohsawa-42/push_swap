@@ -1,46 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   print_bench.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/02 15:46:06 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/03 17:26:19 by msumiji          ###   ########.fr       */
+/*   Created: 2026/07/03 14:29:19 by msumiji           #+#    #+#             */
+/*   Updated: 2026/07/03 16:28:24 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	swap_stack(t_stack *stack)
+static char *strategy(t_benchmark *flag)
 {
-	int	temp;
-
-	if (stack->size < 2)
-		return ;
-	temp = stack->data[0];
-	stack->data[0] = stack->data[1];
-	stack->data[1] = temp;
+	if (flag->simple)
+		return ("Simple");
+	else if (flag->medium)
+		return ("Medium");
+	else if (flag->complex)
+		return ("Complex");
+	else if (flag->small)
+		return("Small");
+	else
+		return ("Adaptive");
 }
 
-void	sa(t_stack *a)
+int	print_bench(t_benchmark *flag)
 {
-	swap_stack(a);
-	write(1, "sa\n", 3);
-	a->sa += 1;
-}
-
-void	sb(t_stack *b)
-{
-	swap_stack(b);
-	write(1, "sb\n", 3);
-	b->sb += 1;
-}
-
-void	ss(t_stack *a, t_stack *b)
-{
-	swap_stack(a);
-	swap_stack(b);
-	write(1, "ss\n", 3);
-	a->ss += 1;
+	ft_printf("[bench] disorder: %f%%\n", 100 * flag->disorder);
+	ft_printf("[bench] strategy: %s\n", strategy(flag));
+	return (0);
 }
