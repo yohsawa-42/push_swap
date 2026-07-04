@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:40:02 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 15:13:45 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/04 17:08:37 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag);
 void		init_operations(t_operations *op);
 void		free_stack(t_stack *stack);
+int			count_operations(t_operations *op);
 
 // src/print_bench.c
 int			print_bench(t_benchmark *flag, t_operations *op);
