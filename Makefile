@@ -6,7 +6,7 @@
 #    By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/02 00:00:00 by yohsawa           #+#    #+#              #
-#    Updated: 2026/07/04 15:18:58 by yohsawa          ###   ########.fr        #
+#    Updated: 2026/07/04 17:43:32 by yohsawa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS = \
 	src/print_bench.c \
 	libft/ft_atoi.c \
 	libft/ft_strncmp.c \
+	libft/ft_putnbr.c \
 
 OBJS = $(SRCS:.c=.o)
 
