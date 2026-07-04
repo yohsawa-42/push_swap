@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:11:10 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/03 18:42:53 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/04 10:46:59 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ static void	push_target(t_stack *a, t_stack *b, int target, int rotate)
 		if (a->data[j] == target)
 		{
 			ra_and_pb(a, b, j);
-			if (rotate && b->size > 1)
+			if (rotate)
 				rb(b);
 			return ;
 		}
 		if (a->data[a->size - j - 1] == target)
 		{
 			ra_and_pb(a, b, a->size - j - 1);
-			if (rotate && b->size > 1)
+			if (rotate)
 				rb(b);
 			return ;
 		}

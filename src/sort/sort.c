@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/03 18:43:06 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/04 11:36:53 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static double	compute_disorder(t_stack *a)
 
 static int	adaptive_sort(t_stack *a, t_stack *b, t_benchmark *flag)
 {
-	if (flag->disorder < 0.2)
+	if (a->size <= 5 || flag->disorder < 0.2)
 	{
 		flag->simple = 1;
 		return (selection_sort(a, b));
@@ -63,12 +63,7 @@ int	sort_stack(t_stack *a, t_stack *b, t_benchmark *flag)
 	flag->disorder = compute_disorder(a);
 	if (!compress_stack(a))
 		return (0);
-	if (a->size <= 5)
-	{
-		flag->small = 1;
-		return (sort_small(a, b));
-	}
-	else if (flag->simple)
+	if (flag->simple)
 		return (selection_sort(a, b));
 	else if (flag->medium)
 		return (chunk_sort(a, b));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:48:40 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/03 18:46:06 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/03 14:29:06 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,4 @@ void	free_stack(t_stack *stack)
 	stack->size = 0;
 }
 
-// void print_bench(t_stack *a, t_stack *b, t_benchmark *flag)
+//void print_bench(t_stack *a, t_stack *b, t_benchmark *flag)
