@@ -159,6 +159,9 @@ push_swap/
 ├── README.md
 ├── include/
 │   └── push_swap.h
+├── libft/
+│   ├── ft_atoi.c
+│   └── ft_strncmp.c
 └── src/
     ├── main.c
     ├── compress.c
@@ -179,7 +182,7 @@ push_swap/
     │   ├── selection_sort.c
     │   ├── chunk_sort.c
     │   └── radix_sort.c
-    └── stack_utils/
+    └── stack/
         ├── stack_init.c
         ├── stack_check.c
         └── stack_validate.c

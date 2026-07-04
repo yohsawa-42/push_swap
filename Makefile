@@ -30,12 +30,14 @@ SRCS = \
 	src/operations/reverse_rotate.c \
 	src/operations/rotate.c \
 	src/operations/swap.c \
-	src/stack_utils/stack_init.c \
-	src/stack_utils/stack_check.c \
-	src/stack_utils/stack_validate.c \
+	src/stack/stack_init.c \
+	src/stack/stack_check.c \
+	src/stack/stack_validate.c \
 	src/ft_printf_err/ft_printf_err.c \
 	src/ft_printf_err/ft_printf_err_utils.c \
 	src/print_bench.c \
+	libft/ft_atoi.c \
+	libft/ft_strncmp.c \
 
 OBJS = $(SRCS:.c=.o)
 

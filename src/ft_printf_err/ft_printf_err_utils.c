@@ -60,14 +60,23 @@ int	ft_putdouble_err(double n)
 {
 	int	ret;
 	int	decimal;
+	int	whole;
 
-	ret = ft_putint_err((int)n);
+	whole = (int)n;
+	decimal = (int)((n - whole) * 100 + 0.5);
+	if (decimal >= 100)
+	{
+		whole++;
+		decimal -= 100;
+	}
+	ret = ft_putint_err(whole);
 	if (ret < 0 || ft_putchar_err('.') < 0)
 		return (-1);
-	decimal = (int)((n - (int)n) * 10);
 	if (decimal < 0)
 		decimal = -decimal;
-	if (ft_putchar_err(decimal + '0') < 0)
+	if (ft_putchar_err(decimal / 10 + '0') < 0)
 		return (-1);
-	return (ret + 2);
+	if (ft_putchar_err(decimal % 10 + '0') < 0)
+		return (-1);
+	return (ret + 3);
 }

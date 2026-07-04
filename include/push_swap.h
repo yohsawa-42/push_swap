@@ -71,9 +71,13 @@ void		rra(t_stack *a, t_operations *op);
 void		rrb(t_stack *b, t_operations *op);
 void		rrr(t_stack *a, t_stack *b, t_operations *op);
 
-// src/utils.c
+// libft/ft_atoi.c
 int			ft_atoi(const char *nptr);
+
+// libft/ft_strncmp.c
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
+
+// src/utils.c
 void		init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag);
 void		init_operations(t_operations *op);
 void		free_stack(t_stack *stack);
@@ -100,15 +104,15 @@ int			radix_sort(t_stack *a, t_stack *b, t_operations *op);
 // src/sort/sort_small.c
 int			sort_small(t_stack *a, t_stack *b, t_operations *op);
 
-// src/stack_utils/stack_init.c
+// src/stack/stack_init.c
 int			init_stack_a(t_stack *a, int ac, char **av, int n);
 int			init_stack_b(t_stack *b, int size);
 
-// src/stack_utils/stack_check.c
+// src/stack/stack_check.c
 int			is_sorted(t_stack *stack);
 int			has_duplicate(t_stack *stack);
 
-// src/stack_utils/stack_validate.c
+// src/stack/stack_validate.c
 int			is_valid_input(int ac, char **av, int n);
 
 // src/main.c
