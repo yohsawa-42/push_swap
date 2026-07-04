@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:46:06 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 09:34:40 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/04 15:13:58 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,24 @@ static void	swap_stack(t_stack *stack)
 	stack->data[1] = temp;
 }
 
-void	sa(t_stack *a)
+void	sa(t_stack *a, t_operations *op)
 {
 	swap_stack(a);
 	write(1, "sa\n", 3);
-	a->sa++;
+	op->sa++;
 }
 
-void	sb(t_stack *b)
+void	sb(t_stack *b, t_operations *op)
 {
 	swap_stack(b);
 	write(1, "sb\n", 3);
-	b->sb++;
+	op->sb++;
 }
 
-void	ss(t_stack *a, t_stack *b)
+void	ss(t_stack *a, t_stack *b, t_operations *op)
 {
 	swap_stack(a);
 	swap_stack(b);
 	write(1, "ss\n", 3);
-	a->ss++;
+	op->ss++;
 }

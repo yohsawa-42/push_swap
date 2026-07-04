@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_small.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 11:10:45 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/04 15:14:11 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,30 @@ static int	find_min_pos(t_stack *a)
 	return (pos);
 }
 
-static void	sort_three(t_stack *a)
+static void	sort_three(t_stack *a, t_operations *op)
 {
 	if (a->data[0] < a->data[1] && a->data[1] < a->data[2])
 		return ;
 	if (a->data[0] > a->data[1] && a->data[0] < a->data[2])
-		sa(a);
+		sa(a, op);
 	else if (a->data[0] > a->data[1] && a->data[1] > a->data[2])
 	{
-		sa(a);
-		rra(a);
+		sa(a, op);
+		rra(a, op);
 	}
 	else if (a->data[0] > a->data[1] && a->data[1] < a->data[2])
-		ra(a);
+		ra(a, op);
 	else if (a->data[0] < a->data[1] && a->data[1] > a->data[2]
 		&& a->data[0] < a->data[2])
 	{
-		sa(a);
-		ra(a);
+		sa(a, op);
+		ra(a, op);
 	}
 	else if (a->data[0] < a->data[1] && a->data[0] > a->data[2])
-		rra(a);
+		rra(a, op);
 }
 
-static void	push_min_to_b(t_stack *a, t_stack *b)
+static void	push_min_to_b(t_stack *a, t_stack *b, t_operations *op)
 {
 	int	pos;
 
@@ -64,27 +64,27 @@ static void	push_min_to_b(t_stack *a, t_stack *b)
 	while (pos != 0)
 	{
 		if (pos <= a->size / 2)
-			ra(a);
+			ra(a, op);
 		else
-			rra(a);
+			rra(a, op);
 		pos = find_min_pos(a);
 	}
-	pb(a, b);
+	pb(a, b, op);
 }
 
-int	sort_small(t_stack *a, t_stack *b)
+int	sort_small(t_stack *a, t_stack *b, t_operations *op)
 {
 	if (a->size == 2)
-		sa(a);
+		sa(a, op);
 	else if (a->size == 3)
-		sort_three(a);
+		sort_three(a, op);
 	else
 	{
 		while (a->size > 3)
-			push_min_to_b(a, b);
-		sort_three(a);
+			push_min_to_b(a, b, op);
+		sort_three(a, op);
 		while (b->size > 0)
-			pa(a, b);
+			pa(a, b, op);
 	}
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:48:40 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/03 14:29:06 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/04 15:14:32 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,31 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-void	print_error(void)
+void	init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag)
 {
-	write(2, "Error\n", 6);
+	a->data = NULL;
+	b->data = NULL;
+	flag->bench = 0;
+	flag->simple = 0;
+	flag->medium = 0;
+	flag->complex = 0;
+	flag->adaptive = 0;
+	flag->disorder = 1.0;
+}
+
+void	init_operations(t_operations *op)
+{
+	op->pa = 0;
+	op->pb = 0;
+	op->sa = 0;
+	op->sb = 0;
+	op->ss = 0;
+	op->ra = 0;
+	op->rb = 0;
+	op->rr = 0;
+	op->rra = 0;
+	op->rrb = 0;
+	op->rrr = 0;
 }
 
 void	free_stack(t_stack *stack)
@@ -63,5 +85,3 @@ void	free_stack(t_stack *stack)
 	stack->data = NULL;
 	stack->size = 0;
 }
-
-//void print_bench(t_stack *a, t_stack *b, t_benchmark *flag)

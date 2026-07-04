@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:59:03 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 09:35:22 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/04 15:13:51 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,70 +35,20 @@ static void	push_stack(t_stack *dst, t_stack *src)
 	src->size--;
 }
 
-void	pa(t_stack *a, t_stack *b)
+void	pa(t_stack *a, t_stack *b, t_operations *op)
 {
 	if (b->size == 0)
 		return ;
 	push_stack(a, b);
 	write(1, "pa\n", 3);
-	a->pa++;
+	op->pa++;
 }
 
-void	pb(t_stack *a, t_stack *b)
+void	pb(t_stack *a, t_stack *b, t_operations *op)
 {
 	if (a->size == 0)
 		return ;
 	push_stack(b, a);
 	write(1, "pb\n", 3);
-	b ->pb++;
-}
-
-void	ra_and_pb(t_stack *a, t_stack *b, int i)
-{
-	int	j;
-
-	j = 0;
-	if (i <= a->size / 2)
-	{
-		while (j < i)
-		{
-			ra(a);
-			j++;
-		}
-		pb(a, b);
-	}
-	else
-	{
-		while (j < a->size - i)
-		{
-			rra(a);
-			j++;
-		}
-		pb(a, b);
-	}
-}
-
-void	rb_and_pa(t_stack *a, t_stack *b, int i)
-{
-	int	j;
-
-	j = 0;
-	if (i <= b->size / 2)
-	{
-		while (j < i)
-		{
-			rb(b);
-			j++;
-		}
-		pa(a, b);
-	}
-	else
-	{
-		while (j < b->size - i)
-		{
-			rrb(b);
-			j++;
-		}
-		pa(a, b);
-	}
+	op->pb++;
 }

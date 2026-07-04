@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:11:10 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/04 10:46:59 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/04 15:14:06 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,99 +22,74 @@ static int	get_chunk_size(int size)
 	return (chunk_size);
 }
 
-static void	push_target(t_stack *a, t_stack *b, int target, int rotate)
+static void	push_chunk_to_b(t_stack *a, t_stack *b, int start, int end,
+		t_operations *op)
 {
-	int	j;
+	int	middle;
+	int	pushed;
 
-	j = 0;
-	while (j <= a->size / 2)
+	middle = start + (end - start) / 2;
+	pushed = 0;
+	while (pushed < end - start)
 	{
-		if (a->data[j] == target)
+		if (start <= a->data[0] && a->data[0] < end)
 		{
-			ra_and_pb(a, b, j);
-			if (rotate)
-				rb(b);
-			return ;
+			pb(a, b, op);
+			if (b->data[0] < middle && b->size > 1)
+				rb(b, op);
+			pushed++;
 		}
-		if (a->data[a->size - j - 1] == target)
-		{
-			ra_and_pb(a, b, a->size - j - 1);
-			if (rotate)
-				rb(b);
-			return ;
-		}
-		j++;
+		else
+			ra(a, op);
 	}
 }
 
-static void	a_to_b(t_stack *a, t_stack *b, int *data, int chunk_size)
+static int	find_pos(t_stack *stack, int target)
 {
-	int	i;
+	int	pos;
+
+	pos = 0;
+	while (pos < stack->size)
+	{
+		if (stack->data[pos] == target)
+			return (pos);
+		pos++;
+	}
+	return (-1);
+}
+
+static void	b_to_a(t_stack *a, t_stack *b, t_operations *op)
+{
+	int	target;
+	int	pos;
+
+	target = b->size - 1;
+	while (target >= 0)
+	{
+		pos = find_pos(b, target);
+		rb_and_pa(a, b, pos, op);
+		target--;
+	}
+}
+
+int	chunk_sort(t_stack *a, t_stack *b, t_operations *op)
+{
+	int	chunk_size;
 	int	start;
+	int	end;
 	int	size;
 
 	size = a->size;
+	chunk_size = get_chunk_size(size);
 	start = 0;
 	while (start < size)
 	{
-		i = start;
-		while (i < start + chunk_size && i < size)
-		{
-			push_target(a, b, data[i], i < start + chunk_size / 2);
-			i++;
-		}
-		start += chunk_size;
+		end = start + chunk_size;
+		if (end > size)
+			end = size;
+		push_chunk_to_b(a, b, start, end, op);
+		start = end;
 	}
-}
-
-static void	b_to_a(t_stack *a, t_stack *b, int *data)
-{
-	int	i;
-	int	j;
-	int	size;
-
-	i = 0;
-	size = b->size;
-	while (i < size)
-	{
-		j = 0;
-		while (j <= b->size / 2)
-		{
-			if (b->data[j] == data[size - i - 1])
-			{
-				rb_and_pa(a, b, j);
-				break ;
-			}
-			if (b->data[b->size - j - 1] == data[size - i - 1])
-			{
-				rb_and_pa(a, b, b->size - j - 1);
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-int	chunk_sort(t_stack *a, t_stack *b)
-{
-	int	*data;
-	int	i;
-	int	size;
-
-	i = 0;
-	size = a->size;
-	data = malloc(sizeof(int) * size);
-	if (!data)
-		return (0);
-	while (i < size)
-	{
-		data[i] = a->data[i];
-		i++;
-	}
-	sort_array(data, size);
-	a_to_b(a, b, data, get_chunk_size(size));
-	b_to_a(a, b, data);
-	free(data);
+	b_to_a(a, b, op);
 	return (1);
 }

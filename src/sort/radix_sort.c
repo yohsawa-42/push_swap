@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:54:54 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 11:09:25 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/04 15:14:08 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_max_bits(int size)
 	return (bits);
 }
 
-int	radix_sort(t_stack *a, t_stack *b)
+int	radix_sort(t_stack *a, t_stack *b, t_operations *op)
 {
 	int	i;
 	int	bit;
@@ -40,13 +40,13 @@ int	radix_sort(t_stack *a, t_stack *b)
 		while (i < size)
 		{
 			if (((a->data[0] >> bit) & 1) == 1)
-				ra(a);
+				ra(a, op);
 			else
-				pb(a, b);
+				pb(a, b, op);
 			i++;
 		}
 		while (b->size > 0)
-			pa(a, b);
+			pa(a, b, op);
 		bit++;
 	}
 	return (1);

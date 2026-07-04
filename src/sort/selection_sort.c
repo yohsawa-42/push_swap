@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   selection_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:55:21 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 11:06:58 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/04 15:14:10 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	find_pos(t_stack *a, int target)
 	return (-1);
 }
 
-static void	rotate_target_to_top(t_stack *a, int target)
+static void	rotate_target_to_top(t_stack *a, int target, t_operations *op)
 {
 	int	pos;
 
@@ -34,17 +34,17 @@ static void	rotate_target_to_top(t_stack *a, int target)
 	if (pos <= a->size / 2)
 	{
 		while (pos-- > 0)
-			ra(a);
+			ra(a, op);
 	}
 	else
 	{
 		pos = a->size - pos;
 		while (pos-- > 0)
-			rra(a);
+			rra(a, op);
 	}
 }
 
-int	selection_sort(t_stack *a, t_stack *b)
+int	selection_sort(t_stack *a, t_stack *b, t_operations *op)
 {
 	int	target;
 	int	size;
@@ -53,11 +53,11 @@ int	selection_sort(t_stack *a, t_stack *b)
 	size = a->size;
 	while (target < size)
 	{
-		rotate_target_to_top(a, target);
-		pb(a, b);
+		rotate_target_to_top(a, target, op);
+		pb(a, b, op);
 		target++;
 	}
 	while (b->size > 0)
-		pa(a, b);
+		pa(a, b, op);
 	return (1);
 }

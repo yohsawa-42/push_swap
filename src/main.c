@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:53:30 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 11:43:04 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/04 15:14:30 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,8 @@ static int	exit_error(t_stack *a, t_stack *b)
 {
 	free_stack(a);
 	free_stack(b);
-	print_error();
+	ft_printf_err("Error\n");
 	return (1);
-}
-
-static void	init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag)
-{
-	a->data = NULL;
-	b->data = NULL;
-	flag->bench = 0;
-	flag->simple = 0;
-	flag->medium = 0;
-	flag->complex = 0;
-	flag->adaptive = 0;
-	flag->disorder = 1.0;
 }
 
 int	strategy_selector(char *c, t_benchmark *flag)
@@ -78,26 +66,28 @@ int	get_bench(int ac, char **av, t_benchmark *flag)
 
 int	main(int ac, char **av)
 {
-	t_stack		a = {0};
-	t_stack		b = {0};
-	int			n;
-	t_benchmark	flag;
+	t_stack			a;
+	t_stack			b;
+	t_operations	op;
+	int				n;
+	t_benchmark		flag;
 
 	if (ac == 1)
 		return (0);
 	init_benchmark(&a, &b, &flag);
+	init_operations(&op);
 	n = get_bench(ac, av, &flag);
 	if (!is_valid_input(ac, av, n) || !init_stack_a(&a, ac, av, n))
 	{
-		print_error();
+		ft_printf_err("Error\n");
 		return (1);
 	}
 	if (has_duplicate(&a) || !init_stack_b(&b, a.size))
 		return (exit_error(&a, &b));
-	if (!is_sorted(&a) && !sort_stack(&a, &b, &flag))
+	if (!is_sorted(&a) && !sort_stack(&a, &b, &flag, &op))
 		return (exit_error(&a, &b));
 	if (flag.bench)
-		print_bench(&flag, &a, &b);
+		print_bench(&flag, &op);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);

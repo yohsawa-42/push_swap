@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print_bench.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 14:29:19 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/04 11:25:58 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/04 15:14:31 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static char *strategy(t_benchmark *flag)
+static char	*strategy(t_benchmark *flag)
 {
 	if (flag->simple)
 		return ("Simple");
@@ -24,15 +24,18 @@ static char *strategy(t_benchmark *flag)
 		return ("Adaptive");
 }
 
-int	print_bench(t_benchmark *flag, t_stack *a, t_stack *b)
+int	print_bench(t_benchmark *flag, t_operations *op)
 {
 	int	sum;
-	sum = a->pa + b->pb + a->rra + b->rrb + a->rrr + a->ra + b->rb
-		 + a->rr + a->sa + b->sb + a->ss;
-	ft_printf("[bench] disorder: %f%%\n", 100 * flag->disorder);
-	ft_printf("[bench] strategy: %s\n", strategy(flag));
-	ft_printf("[bench] total_ops: %d\n", sum);
-	ft_printf("[bench] sa: %d sb: %d ss: %d pa: %d pb: %d\n", a->sa, b->sb, a->ss, a->pa, b->pb);
-	ft_printf("[bench] ra: %d rb: %d rr: %d rra: %d rrb: %d rrr: %d\n", a->ra, b->rb, a->rr, a->rra, b->rrb, a->rrr);
+
+	sum = op->pa + op->pb + op->sa + op->sb + op->ss + op->ra + op->rb + op->rr
+		+ op->rra + op->rrb + op->rrr;
+	ft_printf_err("[bench] disorder: %f%%\n", 100 * flag->disorder);
+	ft_printf_err("[bench] strategy: %s\n", strategy(flag));
+	ft_printf_err("[bench] total_ops: %d\n", sum);
+	ft_printf_err("[bench] sa: %d sb: %d ss: %d pa: %d pb: %d\n", op->sa,
+		op->sb, op->ss, op->pa, op->pb);
+	ft_printf_err("[bench] ra: %d rb: %d rr: %d rra: %d rrb: %d rrr: %d\n",
+		op->ra, op->rb, op->rr, op->rra, op->rrb, op->rrr);
 	return (0);
 }
