@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_err_utils.c                              :+:      :+:    :+:   */
+/*   ft_printf_err_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/04 17:21:29 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 17:21:30 by yohsawa          ###   ########.fr       */
+/*   Created: 2026/07/04 14:39:33 by yohsawa           #+#    #+#             */
+/*   Updated: 2026/07/04 14:52:50 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,14 @@ int	ft_putdouble_err(double n)
 {
 	int	ret;
 	int	decimal;
-	int	whole;
 
-	whole = (int)n;
-	decimal = (int)((n - whole) * 100 + 0.5);
-	if (decimal >= 100)
-	{
-		whole++;
-		decimal -= 100;
-	}
-	ret = ft_putint_err(whole);
+	ret = ft_putint_err((int)n);
 	if (ret < 0 || ft_putchar_err('.') < 0)
 		return (-1);
+	decimal = (int)((n - (int)n) * 10);
 	if (decimal < 0)
 		decimal = -decimal;
-	if (ft_putchar_err(decimal / 10 + '0') < 0)
+	if (ft_putchar_err(decimal + '0') < 0)
 		return (-1);
-	if (ft_putchar_err(decimal % 10 + '0') < 0)
-		return (-1);
-	return (ret + 3);
+	return (ret + 2);
 }

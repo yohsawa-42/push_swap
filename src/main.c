@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:53:30 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 15:14:30 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/04 18:40:53 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int ac, char **av)
 	init_benchmark(&a, &b, &flag);
 	init_operations(&op);
 	n = get_bench(ac, av, &flag);
-	if (!is_valid_input(ac, av, n) || !init_stack_a(&a, ac, av, n))
+	if (!init_stack_a(&a, ac - n, av + n))
 	{
 		ft_printf_err("Error\n");
 		return (1);

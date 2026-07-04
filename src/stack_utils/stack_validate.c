@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_validate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 15:14:28 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/04 18:09:06 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ static int	is_valid_number(char *str)
 	return (str[i] == '\0');
 }
 
-int	is_valid_input(int ac, char **av, int n)
+int	is_valid_input(int ac, char **av)
 {
 	int	i;
 
-	if (n == 0)
+	if (ac == 1)
 		return (0);
-	i = n;
+	i = 0;
 	while (i < ac)
 	{
 		if (!is_valid_number(av[i]))

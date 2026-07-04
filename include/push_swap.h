@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:40:02 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 17:19:59 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/04 18:47:49 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,26 +71,25 @@ void		rra(t_stack *a, t_operations *op);
 void		rrb(t_stack *b, t_operations *op);
 void		rrr(t_stack *a, t_stack *b, t_operations *op);
 
-// libft/ft_atoi.c
-int			ft_atoi(const char *nptr);
-
-// libft/ft_strncmp.c
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-
-// libft/ft_putnbr.c
-void		ft_putnbr(long n);
-
-// src/utils.c
+// src/others/utils.c
 void		init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag);
 void		init_operations(t_operations *op);
 void		free_stack(t_stack *stack);
-int			count_operations(t_operations *op);
 
-// src/print_bench.c
+// src/others/print_bench.c
 int			print_bench(t_benchmark *flag, t_operations *op);
 
-// src/compress.c
+// src/others/compress.c
 int			compress_stack(t_stack *a);
+
+// src/libft/ft_split.c
+char		**ft_split(char const *s, char c);
+
+// src/libft/lfutils.c
+int 		ft_strlen(const char *s);
+char		*ft_strdup(const char *src);
+int			ft_atoi(const char *nptr);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // src/sort/chunk_sort.c
 int			chunk_sort(t_stack *a, t_stack *b, t_operations *op);
@@ -108,16 +107,16 @@ int			radix_sort(t_stack *a, t_stack *b, t_operations *op);
 // src/sort/sort_small.c
 int			sort_small(t_stack *a, t_stack *b, t_operations *op);
 
-// src/stack/stack_init.c
-int			init_stack_a(t_stack *a, int ac, char **av, int n);
+// src/stack_utils/stack_init.c
+int			init_stack_a(t_stack *a, int ac, char **av);
 int			init_stack_b(t_stack *b, int size);
 
-// src/stack/stack_check.c
+// src/stack_utils/stack_check.c
 int			is_sorted(t_stack *stack);
 int			has_duplicate(t_stack *stack);
 
-// src/stack/stack_validate.c
-int			is_valid_input(int ac, char **av, int n);
+// src/stack_utils/stack_validate.c
+int			is_valid_input(int ac, char **av);
 
 // src/main.c
 int			get_bench(int ac, char **av, t_benchmark *flag);

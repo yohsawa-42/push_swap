@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:48:40 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 17:08:34 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/04 18:20:32 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,4 @@ void	free_stack(t_stack *stack)
 		free(stack->data);
 	stack->data = NULL;
 	stack->size = 0;
-}
-
-int	count_operations(t_operations *op)
-{
-	return (op->pa + op->pb + op->sa + op->sb + op->ss + op->ra + op->rb
-		+ op->rr + op->rra + op->rrb + op->rrr);
 }

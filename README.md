@@ -111,7 +111,7 @@ compressed: 2   0 1
 計算量の見積もり:
 
 - 各 target について `find_pos` が最大 `O(n)`
-- それを `n` 回行うため探索だけで `O(n^2)`
+- それを n 回行うため探索だけで `O(n^2)`
 - 回転も各 target で最大 `O(n)` なので、操作数の上限も `O(n^2)`
 - 追加メモリは stack `b` を除けば `O(1)`
 
@@ -159,10 +159,6 @@ push_swap/
 ├── README.md
 ├── include/
 │   └── push_swap.h
-├── libft/
-│   ├── ft_atoi.c
-│   └── ft_strncmp.c
-│   └── ft_putnbr.c
 └── src/
     ├── main.c
     ├── compress.c
@@ -183,7 +179,7 @@ push_swap/
     │   ├── selection_sort.c
     │   ├── chunk_sort.c
     │   └── radix_sort.c
-    └── stack/
+    └── stack_utils/
         ├── stack_init.c
         ├── stack_check.c
         └── stack_validate.c
