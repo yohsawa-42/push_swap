@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:11:10 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/04 15:14:06 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/04 17:25:27 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@ static int	get_chunk_size(int size)
 	return (chunk_size);
 }
 
-static void	push_chunk_to_b(t_stack *a, t_stack *b, int start, int end,
+static void	push_chunk_to_b(t_stack *a, t_stack *b, int range[2],
 		t_operations *op)
 {
+	int	start;
+	int	end;
 	int	middle;
 	int	pushed;
 
+	start = range[0];
+	end = range[1];
 	middle = start + (end - start) / 2;
 	pushed = 0;
 	while (pushed < end - start)
@@ -77,6 +81,7 @@ int	chunk_sort(t_stack *a, t_stack *b, t_operations *op)
 	int	chunk_size;
 	int	start;
 	int	end;
+	int	range[2];
 	int	size;
 
 	size = a->size;
@@ -87,7 +92,9 @@ int	chunk_sort(t_stack *a, t_stack *b, t_operations *op)
 		end = start + chunk_size;
 		if (end > size)
 			end = size;
-		push_chunk_to_b(a, b, start, end, op);
+		range[0] = start;
+		range[1] = end;
+		push_chunk_to_b(a, b, range, op);
 		start = end;
 	}
 	b_to_a(a, b, op);

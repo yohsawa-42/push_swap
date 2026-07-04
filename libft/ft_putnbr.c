@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 16:48:24 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 16:59:59 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/04 17:20:01 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	ft_putnbr(long n)
 	while (divisor > 0)
 	{
 		c = (n / divisor) % 10 + '0';
-		if (write(1, &c, 1) == -1)
-			return (-1);
+		write(1, &c, 1);
 		divisor /= 10;
 	}
 }

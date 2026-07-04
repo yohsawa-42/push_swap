@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:40:02 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 17:08:37 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/04 17:19:59 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ int			ft_atoi(const char *nptr);
 
 // libft/ft_strncmp.c
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
+
+// libft/ft_putnbr.c
+void		ft_putnbr(long n);
 
 // src/utils.c
 void		init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag);
