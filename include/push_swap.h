@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:40:02 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/05 11:32:34 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/05 15:15:54 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@ typedef struct s_stack
 {
 	int		*data;
 	int		size;
-}			t_stack;
-
-typedef struct s_operations
-{
 	int		pa;
 	int		pb;
 	int		sa;
@@ -36,7 +32,7 @@ typedef struct s_operations
 	int		rra;
 	int		rrb;
 	int		rrr;
-}			t_operations;
+}			t_stack;
 
 typedef struct s_benchmark
 {
@@ -49,35 +45,35 @@ typedef struct s_benchmark
 }			t_benchmark;
 
 // src/operations/push.c
-void		pa(t_stack *a, t_stack *b, t_operations *op);
-void		pb(t_stack *a, t_stack *b, t_operations *op);
+void		pa(t_stack *a, t_stack *b);
+void		pb(t_stack *a, t_stack *b);
 
 // src/operations/swap.c
-void		sa(t_stack *a, t_operations *op);
-void		sb(t_stack *b, t_operations *op);
-void		ss(t_stack *a, t_stack *b, t_operations *op);
+void		sa(t_stack *a);
+void		sb(t_stack *b);
+void		ss(t_stack *a, t_stack *b);
 
 // src/operations/rotate_and_push.c
-void		ra_and_pb(t_stack *a, t_stack *b, int pos, t_operations *op);
-void		rb_and_pa(t_stack *a, t_stack *b, int pos, t_operations *op);
+void		ra_and_pb(t_stack *a, t_stack *b, int pos);
+void		rb_and_pa(t_stack *a, t_stack *b, int pos);
 
 // src/operations/rotate.c
-void		ra(t_stack *a, t_operations *op);
-void		rb(t_stack *b, t_operations *op);
-void		rr(t_stack *a, t_stack *b, t_operations *op);
+void		ra(t_stack *a);
+void		rb(t_stack *b);
+void		rr(t_stack *a, t_stack *b);
 
 // src/operations/reverse_rotate.c
-void		rra(t_stack *a, t_operations *op);
-void		rrb(t_stack *b, t_operations *op);
-void		rrr(t_stack *a, t_stack *b, t_operations *op);
+void		rra(t_stack *a);
+void		rrb(t_stack *b);
+void		rrr(t_stack *a, t_stack *b);
 
 // src/others/utils.c
 void		init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag);
-void		init_operations(t_operations *op);
+void		init_operations(t_stack *a, t_stack *b);
 void		free_stack(t_stack *stack);
 
 // src/others/print_bench.c
-int			print_bench(t_benchmark *flag, t_operations *op);
+int			print_bench(t_stack *a, t_stack *b, t_benchmark *flag);
 
 // src/others/compress.c
 int			compress_stack(t_stack *a);
@@ -92,20 +88,16 @@ int			ft_atoi(const char *nptr);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // src/sort/chunk_sort.c
-int			chunk_sort(t_stack *a, t_stack *b, t_operations *op);
+int			chunk_sort(t_stack *a, t_stack *b);
 
 // src/sort/sort.c
-int			sort_stack(t_stack *a, t_stack *b, t_benchmark *flag,
-				t_operations *op);
+int			sort_stack(t_stack *a, t_stack *b, t_benchmark *flag);
 
 // src/sort/selection_sort.c
-int			selection_sort(t_stack *a, t_stack *b, t_operations *op);
+int			selection_sort(t_stack *a, t_stack *b);
 
 // src/sort/radix_sort.c
-int			radix_sort(t_stack *a, t_stack *b, t_operations *op);
-
-// src/sort/sort_small.c
-int			sort_small(t_stack *a, t_stack *b, t_operations *op);
+int			radix_sort(t_stack *a, t_stack *b);
 
 // src/stack_utils/stack_init.c
 int			init_stack_a(t_stack *a, int ac, char **av);

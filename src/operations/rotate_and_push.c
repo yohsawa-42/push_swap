@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_and_push.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 14:45:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 15:13:55 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/05 14:42:26 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra_and_pb(t_stack *a, t_stack *b, int pos, t_operations *op)
+void	ra_and_pb(t_stack *a, t_stack *b, int pos)
 {
 	int	steps;
 
@@ -21,7 +21,7 @@ void	ra_and_pb(t_stack *a, t_stack *b, int pos, t_operations *op)
 	{
 		while (steps < pos)
 		{
-			ra(a, op);
+			ra(a);
 			steps++;
 		}
 	}
@@ -29,14 +29,14 @@ void	ra_and_pb(t_stack *a, t_stack *b, int pos, t_operations *op)
 	{
 		while (steps < a->size - pos)
 		{
-			rra(a, op);
+			rra(a);
 			steps++;
 		}
 	}
-	pb(a, b, op);
+	pb(a, b);
 }
 
-void	rb_and_pa(t_stack *a, t_stack *b, int pos, t_operations *op)
+void	rb_and_pa(t_stack *a, t_stack *b, int pos)
 {
 	int	steps;
 
@@ -45,7 +45,7 @@ void	rb_and_pa(t_stack *a, t_stack *b, int pos, t_operations *op)
 	{
 		while (steps < pos)
 		{
-			rb(b, op);
+			rb(b);
 			steps++;
 		}
 	}
@@ -53,9 +53,9 @@ void	rb_and_pa(t_stack *a, t_stack *b, int pos, t_operations *op)
 	{
 		while (steps < b->size - pos)
 		{
-			rrb(b, op);
+			rrb(b);
 			steps++;
 		}
 	}
-	pa(a, b, op);
+	pa(a, b);
 }

@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 14:29:19 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/04 15:42:56 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/05 14:40:22 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ static char	*strategy(t_benchmark *flag)
 		return ("Adaptive / O(nlogn)");
 }
 
-int	print_bench(t_benchmark *flag, t_operations *op)
+int	print_bench(t_stack *a, t_stack *b, t_benchmark *flag)
 {
 	int	sum;
 
-	sum = op->pa + op->pb + op->sa + op->sb + op->ss + op->ra + op->rb + op->rr
-		+ op->rra + op->rrb + op->rrr;
+	sum = a->pa + b->pb + a->sa + b->sb + a->ss + a->ra + b->rb + a->rr
+		+ a->rra + b->rrb + a->rrr;
 	ft_printf_err("[bench] disorder: %f%%\n", 100 * flag->disorder);
 	ft_printf_err("[bench] strategy: %s\n", strategy(flag));
 	ft_printf_err("[bench] total_ops: %d\n", sum);
-	ft_printf_err("[bench] sa: %d sb: %d ss: %d pa: %d pb: %d\n", op->sa,
-		op->sb, op->ss, op->pa, op->pb);
+	ft_printf_err("[bench] sa: %d sb: %d ss: %d pa: %d pb: %d\n", a->sa,
+		b->sb, a->ss, a->pa, b->pb);
 	ft_printf_err("[bench] ra: %d rb: %d rr: %d rra: %d rrb: %d rrr: %d\n",
-		op->ra, op->rb, op->rr, op->rra, op->rrb, op->rrr);
+		a->ra, b->rb, a->rr, a->rra, b->rrb, a->rrr);
 	return (0);
 }

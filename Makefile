@@ -6,7 +6,7 @@
 #    By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/02 00:00:00 by yohsawa           #+#    #+#              #
-#    Updated: 2026/07/04 18:22:14 by msumiji          ###   ########.fr        #
+#    Updated: 2026/07/05 15:16:59 by msumiji          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ SRCS = \
 	src/sort/sort.c \
 	src/sort/selection_sort.c \
 	src/sort/radix_sort.c \
-	src/sort/sort_small.c \
 	src/sort/chunk_sort.c \
 	src/operations/push.c \
 	src/operations/rotate_and_push.c \

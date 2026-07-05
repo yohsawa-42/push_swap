@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:48:40 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 18:20:32 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/05 14:14:23 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,30 @@ void	init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag)
 	flag->disorder = 1.0;
 }
 
-void	init_operations(t_operations *op)
+void	init_operations(t_stack *a, t_stack *b)
 {
-	op->pa = 0;
-	op->pb = 0;
-	op->sa = 0;
-	op->sb = 0;
-	op->ss = 0;
-	op->ra = 0;
-	op->rb = 0;
-	op->rr = 0;
-	op->rra = 0;
-	op->rrb = 0;
-	op->rrr = 0;
+	a->pa = 0;
+	a->pb = 0;
+	a->sa = 0;
+	a->sb = 0;
+	a->ss = 0;
+	a->ra = 0;
+	a->rb = 0;
+	a->rr = 0;
+	a->rra = 0;
+	a->rrb = 0;
+	a->rrr = 0;
+	b->pa = 0;
+	b->pb = 0;
+	b->sa = 0;
+	b->sb = 0;
+	b->ss = 0;
+	b->ra = 0;
+	b->rb = 0;
+	b->rr = 0;
+	b->rra = 0;
+	b->rrb = 0;
+	b->rrr = 0;
 }
 
 void	free_stack(t_stack *stack)

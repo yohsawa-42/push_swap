@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:11:10 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/04 15:14:06 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/05 14:31:35 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static int	get_chunk_size(int size)
 	return (chunk_size);
 }
 
-static void	push_chunk_to_b(t_stack *a, t_stack *b, int start, int end,
-		t_operations *op)
+static void	push_chunk_to_b(t_stack *a, t_stack *b, int start, int end)
 {
 	int	middle;
 	int	pushed;
@@ -34,13 +33,13 @@ static void	push_chunk_to_b(t_stack *a, t_stack *b, int start, int end,
 	{
 		if (start <= a->data[0] && a->data[0] < end)
 		{
-			pb(a, b, op);
+			pb(a, b);
 			if (b->data[0] < middle && b->size > 1)
-				rb(b, op);
+				rb(b);
 			pushed++;
 		}
 		else
-			ra(a, op);
+			ra(a);
 	}
 }
 
@@ -58,7 +57,7 @@ static int	find_pos(t_stack *stack, int target)
 	return (-1);
 }
 
-static void	b_to_a(t_stack *a, t_stack *b, t_operations *op)
+static void	b_to_a(t_stack *a, t_stack *b)
 {
 	int	target;
 	int	pos;
@@ -67,12 +66,12 @@ static void	b_to_a(t_stack *a, t_stack *b, t_operations *op)
 	while (target >= 0)
 	{
 		pos = find_pos(b, target);
-		rb_and_pa(a, b, pos, op);
+		rb_and_pa(a, b, pos);
 		target--;
 	}
 }
 
-int	chunk_sort(t_stack *a, t_stack *b, t_operations *op)
+int	chunk_sort(t_stack *a, t_stack *b)
 {
 	int	chunk_size;
 	int	start;
@@ -87,9 +86,9 @@ int	chunk_sort(t_stack *a, t_stack *b, t_operations *op)
 		end = start + chunk_size;
 		if (end > size)
 			end = size;
-		push_chunk_to_b(a, b, start, end, op);
+		push_chunk_to_b(a, b, start, end);
 		start = end;
 	}
-	b_to_a(a, b, op);
+	b_to_a(a, b);
 	return (1);
 }

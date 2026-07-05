@@ -10,10 +10,17 @@
 
 使用する操作:
 
-- `sa`, `sb`, `ss`
-- `pa`, `pb`
-- `ra`, `rb`, `rr`
-- `rra`, `rrb`, `rrr`
+sa　スタックaの先頭の２つを入れ替える。要素数が１以下のときは何もしない。
+sb　スタックbの先頭の２つを入れ替える。要素数が１以下のときは何もしない。
+ss　saとsbを同時に行う。
+pa　スタックbの最初の要素をスタックaの先頭に持っていく。スタックbが空のときは何もしない。
+pb　スタックaの最初の要素をスタックbの先頭に持っていく。スタックaが空のときは何もしない。
+ra　スタックaの要素を全て１つずつ上げる。先頭の要素は一番下に行く。
+rb　スタックbの要素を全て１つずつ上げる。先頭の要素は一番下に行く。
+rr　raとrbを同時に行う。
+rra　スタックaの要素を全て１つずつ下げる。最後尾の要素は一番上に行く。
+rrb　スタックbの要素を全て１つずつ下げる。最後尾の要素は一番上に行く。
+rrr　rraとrrbを同時に行う。
 
 ## Build
 
@@ -90,6 +97,11 @@ compressed: 2   0 1
 
 `push_swap` では値そのものではなく大小関係だけが必要です。`0..n-1` に圧縮すると、負数や大きな整数を気にせず扱え、radix sort で必要なビット数も `log2(n)` 程度に抑えられます。
 
+### 戦略の決定
+　引数に--simpleなどの指定があるときは優先的にその戦略にします。指定がないとき、あるいは引数に--adaptiveという指定があるときは、以下の手順で戦略を決定します。
+　まずdisorder metricを計算します。これは要素の中から２つの要素を取り出して、それが昇順になっているか調べます。disorder metricは昇順になっている組み合わせを全ての組み合わせで割ったものです。
+　引数が--simpleのとき、disorder metricが0.2未満のとき、あるいは要素数が5以下の場合は、selection sortで処理を行います。引数が--mediumのとき、あるいはdisorder metricが0.2以上0.5未満のときはchunk sortで処理を行います。引数が--complexのとき、あるいはdisorder metricが0.5以上のときは、radix sortで処理を行います。
+
 ### sort_small / O(1)
 
 要素数 `2..5` 用の専用処理です。
@@ -140,16 +152,6 @@ compressed: 2   0 1
 - つまり `O(n log n)`
 - 各ビットごとに `pb` / `ra` と `pa` が発生するため、操作数も `O(n log n)`
 - 追加メモリは stack `b` を除けば `O(1)`
-
-### adaptive_sort
-
-selector がない場合、または `--adaptive` の場合は disorder を計算して戦略を選びます。
-
-disorder は、全ての組 `(i, j)` について `i < j` かつ `a[i] > a[j]` となる inversion の割合です。
-
-- `disorder < 0.2`: `selection_sort`
-- `0.2 <= disorder < 0.5`: `chunk_sort`
-- `0.5 <= disorder`: `radix_sort`
 
 ## Project Structure
 

@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:53:30 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 18:40:53 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/05 15:51:03 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	strategy_selector(char *c, t_benchmark *flag)
 		flag->adaptive = 1;
 		return (1);
 	}
+	flag->adaptive = 1;
 	return (0);
 }
 
@@ -68,14 +69,13 @@ int	main(int ac, char **av)
 {
 	t_stack			a;
 	t_stack			b;
-	t_operations	op;
 	int				n;
 	t_benchmark		flag;
 
 	if (ac == 1)
 		return (0);
 	init_benchmark(&a, &b, &flag);
-	init_operations(&op);
+	init_operations(&a, &b);
 	n = get_bench(ac, av, &flag);
 	if (!init_stack_a(&a, ac - n, av + n))
 	{
@@ -84,10 +84,10 @@ int	main(int ac, char **av)
 	}
 	if (has_duplicate(&a) || !init_stack_b(&b, a.size))
 		return (exit_error(&a, &b));
-	if (!is_sorted(&a) && !sort_stack(&a, &b, &flag, &op))
+	if (!is_sorted(&a) && !sort_stack(&a, &b, &flag))
 		return (exit_error(&a, &b));
 	if (flag.bench)
-		print_bench(&flag, &op);
+		print_bench(&a, &b, &flag);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);

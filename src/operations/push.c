@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:59:03 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 15:13:51 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/05 14:17:02 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,20 @@ static void	push_stack(t_stack *dst, t_stack *src)
 	src->size--;
 }
 
-void	pa(t_stack *a, t_stack *b, t_operations *op)
+void	pa(t_stack *a, t_stack *b)
 {
 	if (b->size == 0)
 		return ;
 	push_stack(a, b);
 	write(1, "pa\n", 3);
-	op->pa++;
+	a->pa++;
 }
 
-void	pb(t_stack *a, t_stack *b, t_operations *op)
+void	pb(t_stack *a, t_stack *b)
 {
 	if (a->size == 0)
 		return ;
 	push_stack(b, a);
 	write(1, "pb\n", 3);
-	op->pb++;
+	b->pb++;
 }

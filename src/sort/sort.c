@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 15:14:16 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/05 15:54:35 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,47 +39,49 @@ static double	compute_disorder(t_stack *a)
 	return ((double)mistakes / (double)total_pairs);
 }
 
-static int	adaptive_sort(t_stack *a, t_stack *b, t_benchmark *flag,
-		t_operations *op)
+static int	adaptive_sort(t_stack *a, t_stack *b, t_benchmark *flag)
 {
 	if (a->size <= 5)
 	{
 		flag->simple = 1;
-		return (sort_small(a, b, op));
+		return (selection_sort(a, b));
 	}
 	else if (flag->disorder < 0.2)
 	{
 		flag->simple = 1;
-		return (selection_sort(a, b, op));
+		return (selection_sort(a, b));
 	}
 	else if (flag->disorder < 0.5)
 	{
 		flag->medium = 1;
-		return (chunk_sort(a, b, op));
+		return (chunk_sort(a, b));
 	}
 	else
 	{
 		flag->complex = 1;
-		return (radix_sort(a, b, op));
+		return (radix_sort(a, b));
 	}
 }
 
-int	sort_stack(t_stack *a, t_stack *b, t_benchmark *flag, t_operations *op)
+int	sort_stack(t_stack *a, t_stack *b, t_benchmark *flag)
 {
 	flag->disorder = compute_disorder(a);
 	if (!compress_stack(a))
 		return (0);
 	if (a->size <= 5)
-		return (sort_small(a, b, op));
+	{
+		flag->simple = 1;
+		return (selection_sort(a, b));
+	}
 	else if (flag->simple)
-		return (selection_sort(a, b, op));
+		return (selection_sort(a, b));
 	else if (flag->medium)
-		return (chunk_sort(a, b, op));
+		return (chunk_sort(a, b));
 	else if (flag->complex)
-		return (radix_sort(a, b, op));
+		return (radix_sort(a, b));
 	else
 	{
 		flag->adaptive = 1;
-		return (adaptive_sort(a, b, flag, op));
+		return (adaptive_sort(a, b, flag));
 	}
 }
