@@ -6,13 +6,13 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 18:15:39 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/04 18:36:59 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/05 11:33:13 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
 	size_t	i;
 

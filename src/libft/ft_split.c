@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:15:02 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/04 18:17:07 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/05 11:52:20 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,68 +41,66 @@ static char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (c);
 }
 
-static int	count_string(char const *s, char c)
+static int	count_string(char const *s)
 {
 	int	i;
-	int	n;
+	int	start;
+	int	k;
 
 	i = 0;
-	n = 0;
-	while (s[i] != '\0')
+	k = 0;
+	while (s[i])
 	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-		{
-			n++;
+		while (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13))
 			i++;
-		}
-		else
+		start = i;
+		while (s[i] && s[i] != ' ' && (s[i] < 9 || s[i] > 13))
 			i++;
+		if (i > start)
+			k++;
 	}
-	return (n);
+	return (k);
 }
 
-static int	make_string(char const *s, char c, char **a)
+static int	make_string(char const *s, char **a)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	k;
+	int	i;
+	int	start;
+	int	k;
 
 	i = 0;
-	j = 0;
 	k = 0;
-	while (s[i] != '\0')
+	while (s[i])
 	{
-		if (s[i] != c)
+		while (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13))
+			i++;
+		start = i;
+		while (s[i] && s[i] != ' ' && (s[i] < 9 || s[i] > 13))
+			i++;
+		if (i > start)
 		{
-			if (s[i + 1] == c || s[i + 1] == '\0')
-			{
-				a[k] = ft_substr(s, i - j, j + 1);
-				if (a[k] == NULL)
-					return (k);
-				k++;
-				j = 0;
-			}
-			else
-				j++;
+			a[k] = ft_substr(s, start, i - start);
+			if (!a[k])
+				return (k);
+			k++;
 		}
-		i++;
 	}
 	return (0);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s)
 {
 	int		n;
 	int		i;
 	int		j;
 	char	**a;
 
-	n = count_string(s, c);
+	n = count_string(s);
 	i = 0;
 	a = (char **)malloc((n + 1) * sizeof(char *));
 	if (a == NULL)
 		return (NULL);
-	j = make_string(s, c, a);
+	j = make_string(s, a);
 	if (j > 0)
 	{
 		while (i < j)

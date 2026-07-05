@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 17:32:06 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 18:43:31 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/05 11:59:18 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	init_stack_a(t_stack *a, int ac, char **av)
 	char	**s;
 
 	i = 0;
-	s = ft_split(av[0], ' ');
+	s = ft_split(av[0]);
 	size = 0;
 	while (s[i] != NULL)
 	{
@@ -45,13 +45,13 @@ int	init_stack_a(t_stack *a, int ac, char **av)
 	}
 	if (size > 1)
 	{
-		if(!is_valid_input(size, s))
+		if (!is_valid_input(size, s))
 			return (0);
 		return (init_data(a, size, s));
 	}
 	else
 	{
-		if(!is_valid_input(ac, av))
+		if (!is_valid_input(ac, av))
 			return (0);
 		return (init_data(a, ac, av));
 	}

@@ -6,7 +6,7 @@
 /*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:40:02 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/04 18:47:49 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/05 11:32:34 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ int			print_bench(t_benchmark *flag, t_operations *op);
 int			compress_stack(t_stack *a);
 
 // src/libft/ft_split.c
-char		**ft_split(char const *s, char c);
+char		**ft_split(char const *s);
 
 // src/libft/lfutils.c
-int 		ft_strlen(const char *s);
+int			ft_strlen(const char *s);
 char		*ft_strdup(const char *src);
 int			ft_atoi(const char *nptr);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
