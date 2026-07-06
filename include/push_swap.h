@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:40:02 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/06 19:02:04 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/06 20:32:20 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_context
 {
 	t_stack			*a;
 	t_stack			*b;
+	t_benchmark		*flag;
 	t_operations	op;
 	int				count;
 }			t_context;
@@ -79,12 +80,13 @@ void		rrb(t_context *context);
 void		rrr(t_context *context);
 
 // src/others/utils.c
-void		init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag);
-void		init_context(t_context *context, t_stack *a, t_stack *b);
+void		init_benchmark(t_benchmark *flag);
+void		init_context(t_context *context, t_stack *a, t_stack *b,
+				t_benchmark *flag);
 void		free_stack(t_stack *stack);
 
 // src/others/print_bench.c
-int			print_bench(t_context *context, t_benchmark *flag);
+int			print_bench(t_context *context);
 
 // src/others/compress.c
 int			compress_stack(t_stack *a);
@@ -111,7 +113,7 @@ void		ft_putnbr(long n);
 int			chunk_sort(t_context *context);
 
 // src/sort/sort.c
-int			sort_stack(t_context *context, t_benchmark *flag);
+int			sort_stack(t_context *context);
 
 // src/sort/selection_sort.c
 int			selection_sort(t_context *context);
@@ -131,8 +133,8 @@ int			has_duplicate(t_stack *stack);
 int			is_valid_input(int ac, char **av);
 
 // src/main.c
-int			get_bench(int ac, char **av, t_benchmark *flag);
-int			strategy_selector(char *c, t_benchmark *flag);
+int			get_bench(int ac, char **av, t_context *context);
+int			strategy_selector(char *c, t_context *context);
 
 // src/ft_printf_err/ft_printf_err.c
 int			ft_printf_err(const char *fmt, ...);

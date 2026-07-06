@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/06 19:24:00 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/06 20:36:46 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ static double	compute_disorder(t_stack *a)
 	return ((double)mistakes / (double)total_pairs);
 }
 
-static int	adaptive_sort(t_context *context, t_benchmark *flag)
+static int	adaptive_sort(t_context *context)
 {
+	t_benchmark	*flag;
+
+	flag = context->flag;
 	if (context->a->size <= 5)
 	{
 		flag->simple = 1;
@@ -63,8 +66,11 @@ static int	adaptive_sort(t_context *context, t_benchmark *flag)
 	}
 }
 
-int	sort_stack(t_context *context, t_benchmark *flag)
+int	sort_stack(t_context *context)
 {
+	t_benchmark	*flag;
+
+	flag = context->flag;
 	flag->disorder = compute_disorder(context->a);
 	if (!compress_stack(context->a))
 		return (0);
@@ -82,6 +88,6 @@ int	sort_stack(t_context *context, t_benchmark *flag)
 	else
 	{
 		flag->adaptive = 1;
-		return (adaptive_sort(context, flag));
+		return (adaptive_sort(context));
 	}
 }

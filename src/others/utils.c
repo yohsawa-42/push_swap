@@ -6,16 +6,14 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:48:40 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/06 19:23:52 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/06 20:36:34 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag)
+void	init_benchmark(t_benchmark *flag)
 {
-	a->data = NULL;
-	b->data = NULL;
 	flag->bench = 0;
 	flag->simple = 0;
 	flag->medium = 0;
@@ -24,10 +22,14 @@ void	init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag)
 	flag->disorder = 1.0;
 }
 
-void	init_context(t_context *context, t_stack *a, t_stack *b)
+void	init_context(t_context *context, t_stack *a, t_stack *b,
+		t_benchmark *flag)
 {
+	a->data = NULL;
+	b->data = NULL;
 	context->a = a;
 	context->b = b;
+	context->flag = flag;
 	context->op.pa = 0;
 	context->op.pb = 0;
 	context->op.sa = 0;

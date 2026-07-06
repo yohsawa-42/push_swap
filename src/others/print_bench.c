@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 14:29:19 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/06 19:23:49 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/06 20:36:30 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ static char	*strategy(t_benchmark *flag)
 		return ("Adaptive / O(nlogn)");
 }
 
-int	print_bench(t_context *context, t_benchmark *flag)
+int	print_bench(t_context *context)
 {
 	t_operations	*op;
+	t_benchmark		*flag;
 
 	op = &context->op;
+	flag = context->flag;
 	ft_printf_err("[bench] disorder: %f%%\n", 100 * flag->disorder);
 	ft_printf_err("[bench] strategy: %s\n", strategy(flag));
 	ft_printf_err("[bench] total_ops: %d\n", context->count);
