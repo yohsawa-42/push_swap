@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:54:54 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/05 14:30:33 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/06 19:23:56 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,27 @@ static int	get_max_bits(int size)
 	return (bits);
 }
 
-int	radix_sort(t_stack *a, t_stack *b)
+int	radix_sort(t_context *context)
 {
-	int	i;
-	int	bit;
-	int	size;
-	int	max_bits;
+	int		i;
+	int		bit;
+	int		max_bits;
 
-	size = a->size;
-	max_bits = get_max_bits(size);
+	max_bits = get_max_bits(context->a->size);
 	bit = 0;
 	while (bit < max_bits)
 	{
 		i = 0;
-		while (i < size)
+		while (i < context->a->size + context->b->size)
 		{
-			if (((a->data[0] >> bit) & 1) == 1)
-				ra(a);
+			if (((context->a->data[0] >> bit) & 1) == 1)
+				ra(context);
 			else
-				pb(a, b);
+				pb(context);
 			i++;
 		}
-		while (b->size > 0)
-			pa(a, b);
+		while (context->b->size > 0)
+			pa(context);
 		bit++;
 	}
 	return (1);

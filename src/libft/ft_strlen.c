@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_and_push.c                                  :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/04 14:45:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/06 19:23:42 by yohsawa          ###   ########.fr       */
+/*   Created: 2026/07/06 18:07:15 by yohsawa           #+#    #+#             */
+/*   Updated: 2026/07/06 19:23:34 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rb_and_pa(t_context *context, int pos)
+int	ft_strlen(const char *s)
 {
-	int	steps;
+	size_t	i;
 
-	steps = 0;
-	if (pos <= context->b->size / 2)
+	i = 0;
+	while (s[i] != '\0')
 	{
-		while (steps < pos)
-		{
-			rb(context);
-			steps++;
-		}
+		i++;
 	}
-	else
-	{
-		while (steps < context->b->size - pos)
-		{
-			rrb(context);
-			steps++;
-		}
-	}
-	pa(context);
+	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:53:30 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/05 15:51:03 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/06 19:24:33 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,14 @@ int	main(int ac, char **av)
 {
 	t_stack			a;
 	t_stack			b;
+	t_context		context;
 	int				n;
 	t_benchmark		flag;
 
 	if (ac == 1)
 		return (0);
 	init_benchmark(&a, &b, &flag);
-	init_operations(&a, &b);
+	init_context(&context, &a, &b);
 	n = get_bench(ac, av, &flag);
 	if (!init_stack_a(&a, ac - n, av + n))
 	{
@@ -84,10 +85,10 @@ int	main(int ac, char **av)
 	}
 	if (has_duplicate(&a) || !init_stack_b(&b, a.size))
 		return (exit_error(&a, &b));
-	if (!is_sorted(&a) && !sort_stack(&a, &b, &flag))
+	if (!is_sorted(&a) && !sort_stack(&context, &flag))
 		return (exit_error(&a, &b));
 	if (flag.bench)
-		print_bench(&a, &b, &flag);
+		print_bench(&context, &flag);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);

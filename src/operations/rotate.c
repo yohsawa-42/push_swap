@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:15:49 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/05 14:19:59 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/06 19:23:43 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,33 @@ static void	rotate_stack(t_stack *stack)
 	stack->data[i] = temp;
 }
 
-void	ra(t_stack *a)
+void	ra(t_context *context)
 {
-	rotate_stack(a);
+	if (context->a->size < 2)
+		return ;
+	rotate_stack(context->a);
 	write(1, "ra\n", 3);
-	a->ra++;
+	context->op.ra++;
+	context->count++;
 }
 
-void	rb(t_stack *b)
+void	rb(t_context *context)
 {
-	rotate_stack(b);
+	if (context->b->size < 2)
+		return ;
+	rotate_stack(context->b);
 	write(1, "rb\n", 3);
-	b->rb++;
+	context->op.rb++;
+	context->count++;
 }
 
-void	rr(t_stack *a, t_stack *b)
+void	rr(t_context *context)
 {
-	rotate_stack(a);
-	rotate_stack(b);
+	if (context->a->size < 2 && context->b->size < 2)
+		return ;
+	rotate_stack(context->a);
+	rotate_stack(context->b);
 	write(1, "rr\n", 3);
-	a->rr++;
+	context->op.rr++;
+	context->count++;
 }

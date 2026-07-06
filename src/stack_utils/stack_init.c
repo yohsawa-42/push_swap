@@ -3,27 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   stack_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 17:32:06 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/05 11:59:18 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/06 19:24:04 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	init_data(t_stack *a, int size, char **s)
+static void	free_split(char **split)
 {
 	int	i;
 
-	a->size = size;
-	a->data = malloc(sizeof(int) * a->size);
-	if (!a->data)
-		return (0);
+	if (!split)
+		return ;
 	i = 0;
-	while (i < a->size)
+	while (split[i])
 	{
-		a->data[i] = ft_atoi(s[i]);
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
+static int	count_values(int ac, char **av, int *size)
+{
+	char	**split;
+	int		i;
+	int		j;
+
+	*size = 0;
+	i = 0;
+	while (i < ac)
+	{
+		split = ft_split(av[i]);
+		if (!split)
+			return (0);
+		j = 0;
+		while (split[j])
+		{
+			if (!is_valid_input(1, &split[j]))
+				return (free_split(split), 0);
+			(*size)++;
+			j++;
+		}
+		free_split(split);
+		if (j == 0)
+			return (0);
+		i++;
+	}
+	return (*size > 0);
+}
+
+static int	fill_data(int *data, int ac, char **av)
+{
+	char	**split;
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	k = 0;
+	while (i < ac)
+	{
+		split = ft_split(av[i]);
+		if (!split)
+			return (0);
+		j = 0;
+		while (split[j])
+		{
+			data[k] = ft_atoi(split[j]);
+			k++;
+			j++;
+		}
+		free_split(split);
 		i++;
 	}
 	return (1);
@@ -31,30 +85,20 @@ static int	init_data(t_stack *a, int size, char **s)
 
 int	init_stack_a(t_stack *a, int ac, char **av)
 {
-	int		i;
-	int		size;
-	char	**s;
+	int	size;
 
-	i = 0;
-	s = ft_split(av[0]);
-	size = 0;
-	while (s[i] != NULL)
+	if (ac == 0 || !count_values(ac, av, &size))
+		return (0);
+	a->data = malloc(sizeof(int) * size);
+	if (!a->data)
+		return (0);
+	a->size = size;
+	if (!fill_data(a->data, ac, av))
 	{
-		i++;
-		size++;
+		free_stack(a);
+		return (0);
 	}
-	if (size > 1)
-	{
-		if (!is_valid_input(size, s))
-			return (0);
-		return (init_data(a, size, s));
-	}
-	else
-	{
-		if (!is_valid_input(ac, av))
-			return (0);
-		return (init_data(a, ac, av));
-	}
+	return (1);
 }
 
 int	init_stack_b(t_stack *b, int size)

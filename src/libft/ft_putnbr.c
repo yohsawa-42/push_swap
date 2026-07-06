@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_and_push.c                                  :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/04 14:45:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/06 19:23:42 by yohsawa          ###   ########.fr       */
+/*   Created: 2026/07/06 18:26:29 by yohsawa           #+#    #+#             */
+/*   Updated: 2026/07/06 19:23:23 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rb_and_pa(t_context *context, int pos)
+void	ft_putnbr(long n)
 {
-	int	steps;
+	char	c;
+	long	divisor;
 
-	steps = 0;
-	if (pos <= context->b->size / 2)
+	if (n < 0)
 	{
-		while (steps < pos)
-		{
-			rb(context);
-			steps++;
-		}
+		write(1, "-", 1);
+		n *= -1;
 	}
-	else
+	divisor = 1;
+	while (n / divisor >= 10)
+		divisor *= 10;
+	while (divisor > 0)
 	{
-		while (steps < context->b->size - pos)
-		{
-			rrb(context);
-			steps++;
-		}
+		c = (n / divisor) % 10 + '0';
+		write(1, &c, 1);
+		divisor /= 10;
 	}
-	pa(context);
 }

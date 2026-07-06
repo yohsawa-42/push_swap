@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:46:06 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/05 14:19:39 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/06 19:23:45 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,33 @@ static void	swap_stack(t_stack *stack)
 	stack->data[1] = temp;
 }
 
-void	sa(t_stack *a)
+void	sa(t_context *context)
 {
-	swap_stack(a);
+	if (context->a->size < 2)
+		return ;
+	swap_stack(context->a);
 	write(1, "sa\n", 3);
-	a->sa++;
+	context->op.sa++;
+	context->count++;
 }
 
-void	sb(t_stack *b)
+void	sb(t_context *context)
 {
-	swap_stack(b);
+	if (context->b->size < 2)
+		return ;
+	swap_stack(context->b);
 	write(1, "sb\n", 3);
-	b->sb++;
+	context->op.sb++;
+	context->count++;
 }
 
-void	ss(t_stack *a, t_stack *b)
+void	ss(t_context *context)
 {
-	swap_stack(a);
-	swap_stack(b);
+	if (context->a->size < 2 && context->b->size < 2)
+		return ;
+	swap_stack(context->a);
+	swap_stack(context->b);
 	write(1, "ss\n", 3);
-	a->ss++;
+	context->op.ss++;
+	context->count++;
 }

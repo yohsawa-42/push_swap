@@ -3,36 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   selection_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:55:21 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/05 15:06:52 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/06 19:23:58 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	sort_three(t_stack *a)
+static void	sort_three(t_context *context)
 {
+	t_stack	*a;
+
+	a = context->a;
 	if (a->data[0] < a->data[1] && a->data[1] < a->data[2])
 		return ;
 	if (a->data[0] > a->data[1] && a->data[0] < a->data[2])
-		sa(a);
+		sa(context);
 	else if (a->data[0] > a->data[1] && a->data[1] > a->data[2])
 	{
-		sa(a);
-		rra(a);
+		sa(context);
+		rra(context);
 	}
 	else if (a->data[0] > a->data[1] && a->data[1] < a->data[2])
-		ra(a);
+		ra(context);
 	else if (a->data[0] < a->data[1] && a->data[1] > a->data[2]
 		&& a->data[0] < a->data[2])
 	{
-		sa(a);
-		ra(a);
+		sa(context);
+		ra(context);
 	}
 	else if (a->data[0] < a->data[1] && a->data[0] > a->data[2])
-		rra(a);
+		rra(context);
 }
 
 static int	find_pos(t_stack *a, int target)
@@ -49,45 +52,51 @@ static int	find_pos(t_stack *a, int target)
 	return (-1);
 }
 
-static void	rotate_target_to_top(t_stack *a, int target)
+static void	rotate_target_to_top(t_context *context, int target)
 {
-	int	pos;
+	t_stack	*a;
+	int		pos;
 
+	a = context->a;
 	pos = find_pos(a, target);
 	if (pos <= a->size / 2)
 	{
 		while (pos-- > 0)
-			ra(a);
+			ra(context);
 	}
 	else
 	{
 		pos = a->size - pos;
 		while (pos-- > 0)
-			rra(a);
+			rra(context);
 	}
 }
 
-int	selection_sort(t_stack *a, t_stack *b)
+int	selection_sort(t_context *context)
 {
-	int	target;
+	t_stack	*a;
+	t_stack	*b;
+	int		target;
 
+	a = context->a;
+	b = context->b;
 	target = 0;
 	if (a->size == 2)
 	{
-		sa(a);
+		sa(context);
 		return (1);
 	}
 	while (a->size > 3)
 	{
-		rotate_target_to_top(a, target);
+		rotate_target_to_top(context, target);
 		if (is_sorted(a))
 			break ;
-		pb(a, b);
+		pb(context);
 		target++;
 	}
 	if (a->size == 3)
-		sort_three(a);
+		sort_three(context);
 	while (b->size > 0)
-		pa(a, b);
+		pa(context);
 	return (1);
 }

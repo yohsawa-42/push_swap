@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+         #
+#    By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/02 00:00:00 by yohsawa           #+#    #+#              #
-#    Updated: 2026/07/05 15:16:59 by msumiji          ###   ########.fr        #
+#    Updated: 2026/07/06 19:24:35 by yohsawa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,11 @@ SRCS = \
 	src/others/print_bench.c \
 	src/others/compress.c \
 	src/others/utils.c \
+	src/libft/ft_atoi.c \
+	src/libft/ft_strdup.c \
 	src/libft/ft_split.c \
-	src/libft/lfutils.c \
+	src/libft/ft_strlen.c \
+	src/libft/ft_strncmp.c
 
 OBJS = $(SRCS:.c=.o)
 

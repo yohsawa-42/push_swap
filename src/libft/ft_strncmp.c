@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_and_push.c                                  :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/04 14:45:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/06 19:23:42 by yohsawa          ###   ########.fr       */
+/*   Created: 2026/07/06 18:12:11 by yohsawa           #+#    #+#             */
+/*   Updated: 2026/07/06 19:23:36 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rb_and_pa(t_context *context, int pos)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	steps;
+	size_t	i;
 
-	steps = 0;
-	if (pos <= context->b->size / 2)
+	i = 0;
+	while (i < n && (s1[i] || s2[i]))
 	{
-		while (steps < pos)
-		{
-			rb(context);
-			steps++;
-		}
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
-	else
-	{
-		while (steps < context->b->size - pos)
-		{
-			rrb(context);
-			steps++;
-		}
-	}
-	pa(context);
+	return (0);
 }

@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_and_push.c                                  :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/04 14:45:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/06 19:23:42 by yohsawa          ###   ########.fr       */
+/*   Created: 2026/07/06 18:09:53 by yohsawa           #+#    #+#             */
+/*   Updated: 2026/07/06 19:23:31 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rb_and_pa(t_context *context, int pos)
+char	*ft_strdup(const char *src)
 {
-	int	steps;
+	char	*p;
+	int		i;
 
-	steps = 0;
-	if (pos <= context->b->size / 2)
+	p = malloc(ft_strlen(src) + 1);
+	if (p == NULL)
+		return (NULL);
+	i = 0;
+	while (src[i] != '\0')
 	{
-		while (steps < pos)
-		{
-			rb(context);
-			steps++;
-		}
+		p[i] = src[i];
+		i++;
 	}
-	else
-	{
-		while (steps < context->b->size - pos)
-		{
-			rrb(context);
-			steps++;
-		}
-	}
-	pa(context);
+	p[i] = '\0';
+	return (p);
 }

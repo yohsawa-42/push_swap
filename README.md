@@ -63,7 +63,7 @@ sa
 - `--complex`: `radix_sort`
 - `--adaptive`: disorder を見て自動選択
 
-selector を省略した場合も adaptive として動きます。要素数が `5` 以下の場合は、selector に関係なく `sort_small` を優先します。
+selector を省略した場合も adaptive として動きます。要素数が `5` 以下の場合は、selector に関係なく `selection_sort` の小さい入力向け処理を優先します。
 
 `--bench` と selector は組み合わせられます。
 
@@ -102,9 +102,9 @@ compressed: 2   0 1
 　まずdisorder metricを計算します。これは要素の中から２つの要素を取り出して、それが昇順になっているか調べます。disorder metricは昇順になっている組み合わせを全ての組み合わせで割ったものです。
 　引数が--simpleのとき、disorder metricが0.2未満のとき、あるいは要素数が5以下の場合は、selection sortで処理を行います。引数が--mediumのとき、あるいはdisorder metricが0.2以上0.5未満のときはchunk sortで処理を行います。引数が--complexのとき、あるいはdisorder metricが0.5以上のときは、radix sortで処理を行います。
 
-### sort_small / O(1)
+### selection_sort small case / O(1)
 
-要素数 `2..5` 用の専用処理です。
+`selection_sort.c` 内の、要素数 `2..5` 用の処理です。
 
 - `2`: 必要なら `sa`
 - `3`: 並びに応じて `sa`, `ra`, `rra`
@@ -163,21 +163,27 @@ push_swap/
 │   └── push_swap.h
 └── src/
     ├── main.c
-    ├── compress.c
-    ├── utils.c
-    ├── print_bench.c
     ├── ft_printf_err/
     │   ├── ft_printf_err.c
     │   └── ft_printf_err_utils.c
+    ├── libft/
+    │   ├── ft_atoi.c
+    │   ├── ft_split.c
+    │   ├── ft_strdup.c
+    │   ├── ft_strlen.c
+    │   └── ft_strncmp.c
     ├── operations/
     │   ├── push.c
     │   ├── rotate.c
     │   ├── reverse_rotate.c
     │   ├── rotate_and_push.c
     │   └── swap.c
+    ├── others/
+    │   ├── compress.c
+    │   ├── print_bench.c
+    │   └── utils.c
     ├── sort/
     │   ├── sort.c
-    │   ├── sort_small.c
     │   ├── selection_sort.c
     │   ├── chunk_sort.c
     │   └── radix_sort.c
@@ -190,7 +196,7 @@ push_swap/
 ## Notes
 
 - `ft_printf_err` は bench と error 表示用の最小 printf です。標準エラー出力へ出します。
-- `t_operations` で各操作の回数を数え、`--bench` で表示します。
+- `t_stack` 内のカウンタで各操作の回数を数え、`--bench` で表示します。
 - `rotate_and_push.c` には、指定位置を最短方向で top に回してから push する補助関数を置いています。
 
 ## Resources

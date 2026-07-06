@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:26:15 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/05 14:21:38 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/06 19:23:40 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,33 @@ static void	reverse_rotate_stack(t_stack *stack)
 	stack->data[i] = temp;
 }
 
-void	rra(t_stack *a)
+void	rra(t_context *context)
 {
-	reverse_rotate_stack(a);
+	if (context->a->size < 2)
+		return ;
+	reverse_rotate_stack(context->a);
 	write(1, "rra\n", 4);
-	a->rra++;
+	context->op.rra++;
+	context->count++;
 }
 
-void	rrb(t_stack *b)
+void	rrb(t_context *context)
 {
-	reverse_rotate_stack(b);
+	if (context->b->size < 2)
+		return ;
+	reverse_rotate_stack(context->b);
 	write(1, "rrb\n", 4);
-	b->rrb++;
+	context->op.rrb++;
+	context->count++;
 }
 
-void	rrr(t_stack *a, t_stack *b)
+void	rrr(t_context *context)
 {
-	reverse_rotate_stack(a);
-	reverse_rotate_stack(b);
+	if (context->a->size < 2 && context->b->size < 2)
+		return ;
+	reverse_rotate_stack(context->a);
+	reverse_rotate_stack(context->b);
 	write(1, "rrr\n", 4);
-	a->rrr++;
+	context->op.rrr++;
+	context->count++;
 }

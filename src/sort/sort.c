@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/05 15:54:35 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/06 19:24:00 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,49 +39,49 @@ static double	compute_disorder(t_stack *a)
 	return ((double)mistakes / (double)total_pairs);
 }
 
-static int	adaptive_sort(t_stack *a, t_stack *b, t_benchmark *flag)
+static int	adaptive_sort(t_context *context, t_benchmark *flag)
 {
-	if (a->size <= 5)
+	if (context->a->size <= 5)
 	{
 		flag->simple = 1;
-		return (selection_sort(a, b));
+		return (selection_sort(context));
 	}
 	else if (flag->disorder < 0.2)
 	{
 		flag->simple = 1;
-		return (selection_sort(a, b));
+		return (selection_sort(context));
 	}
 	else if (flag->disorder < 0.5)
 	{
 		flag->medium = 1;
-		return (chunk_sort(a, b));
+		return (chunk_sort(context));
 	}
 	else
 	{
 		flag->complex = 1;
-		return (radix_sort(a, b));
+		return (radix_sort(context));
 	}
 }
 
-int	sort_stack(t_stack *a, t_stack *b, t_benchmark *flag)
+int	sort_stack(t_context *context, t_benchmark *flag)
 {
-	flag->disorder = compute_disorder(a);
-	if (!compress_stack(a))
+	flag->disorder = compute_disorder(context->a);
+	if (!compress_stack(context->a))
 		return (0);
-	if (a->size <= 5)
+	if (context->a->size <= 5)
 	{
 		flag->simple = 1;
-		return (selection_sort(a, b));
+		return (selection_sort(context));
 	}
 	else if (flag->simple)
-		return (selection_sort(a, b));
+		return (selection_sort(context));
 	else if (flag->medium)
-		return (chunk_sort(a, b));
+		return (chunk_sort(context));
 	else if (flag->complex)
-		return (radix_sort(a, b));
+		return (radix_sort(context));
 	else
 	{
 		flag->adaptive = 1;
-		return (adaptive_sort(a, b, flag));
+		return (adaptive_sort(context, flag));
 	}
 }

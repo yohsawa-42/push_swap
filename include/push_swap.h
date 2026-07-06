@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:40:02 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/05 15:15:54 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/06 19:02:04 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,6 @@ typedef struct s_stack
 {
 	int		*data;
 	int		size;
-	int		pa;
-	int		pb;
-	int		sa;
-	int		sb;
-	int		ss;
-	int		ra;
-	int		rb;
-	int		rr;
-	int		rra;
-	int		rrb;
-	int		rrr;
 }			t_stack;
 
 typedef struct s_benchmark
@@ -44,36 +33,58 @@ typedef struct s_benchmark
 	double	disorder;
 }			t_benchmark;
 
+typedef struct s_operations
+{
+	int		pa;
+	int		pb;
+	int		sa;
+	int		sb;
+	int		ss;
+	int		ra;
+	int		rb;
+	int		rr;
+	int		rra;
+	int		rrb;
+	int		rrr;
+}			t_operations;
+
+typedef struct s_context
+{
+	t_stack			*a;
+	t_stack			*b;
+	t_operations	op;
+	int				count;
+}			t_context;
+
 // src/operations/push.c
-void		pa(t_stack *a, t_stack *b);
-void		pb(t_stack *a, t_stack *b);
+void		pa(t_context *context);
+void		pb(t_context *context);
 
 // src/operations/swap.c
-void		sa(t_stack *a);
-void		sb(t_stack *b);
-void		ss(t_stack *a, t_stack *b);
+void		sa(t_context *context);
+void		sb(t_context *context);
+void		ss(t_context *context);
 
 // src/operations/rotate_and_push.c
-void		ra_and_pb(t_stack *a, t_stack *b, int pos);
-void		rb_and_pa(t_stack *a, t_stack *b, int pos);
+void		rb_and_pa(t_context *context, int pos);
 
 // src/operations/rotate.c
-void		ra(t_stack *a);
-void		rb(t_stack *b);
-void		rr(t_stack *a, t_stack *b);
+void		ra(t_context *context);
+void		rb(t_context *context);
+void		rr(t_context *context);
 
 // src/operations/reverse_rotate.c
-void		rra(t_stack *a);
-void		rrb(t_stack *b);
-void		rrr(t_stack *a, t_stack *b);
+void		rra(t_context *context);
+void		rrb(t_context *context);
+void		rrr(t_context *context);
 
 // src/others/utils.c
 void		init_benchmark(t_stack *a, t_stack *b, t_benchmark *flag);
-void		init_operations(t_stack *a, t_stack *b);
+void		init_context(t_context *context, t_stack *a, t_stack *b);
 void		free_stack(t_stack *stack);
 
 // src/others/print_bench.c
-int			print_bench(t_stack *a, t_stack *b, t_benchmark *flag);
+int			print_bench(t_context *context, t_benchmark *flag);
 
 // src/others/compress.c
 int			compress_stack(t_stack *a);
@@ -81,23 +92,32 @@ int			compress_stack(t_stack *a);
 // src/libft/ft_split.c
 char		**ft_split(char const *s);
 
-// src/libft/lfutils.c
+// src/libft/ft_strlen.c
 int			ft_strlen(const char *s);
+
+// src/libft/ft_strdup.c
 char		*ft_strdup(const char *src);
+
+// src/libft/ft_atoi.c
 int			ft_atoi(const char *nptr);
+
+// src/libft/ft_strncmp.c
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
+// src/libft/ft_putnbr.c
+void		ft_putnbr(long n);
+
 // src/sort/chunk_sort.c
-int			chunk_sort(t_stack *a, t_stack *b);
+int			chunk_sort(t_context *context);
 
 // src/sort/sort.c
-int			sort_stack(t_stack *a, t_stack *b, t_benchmark *flag);
+int			sort_stack(t_context *context, t_benchmark *flag);
 
 // src/sort/selection_sort.c
-int			selection_sort(t_stack *a, t_stack *b);
+int			selection_sort(t_context *context);
 
 // src/sort/radix_sort.c
-int			radix_sort(t_stack *a, t_stack *b);
+int			radix_sort(t_context *context);
 
 // src/stack_utils/stack_init.c
 int			init_stack_a(t_stack *a, int ac, char **av);
