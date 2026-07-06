@@ -6,7 +6,7 @@
 #    By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/02 00:00:00 by yohsawa           #+#    #+#              #
-#    Updated: 2026/07/06 19:24:35 by yohsawa          ###   ########.fr        #
+#    Updated: 2026/07/06 20:11:30 by yohsawa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRCS = \
 	src/libft/ft_strdup.c \
 	src/libft/ft_split.c \
 	src/libft/ft_strlen.c \
-	src/libft/ft_strncmp.c
+	src/libft/ft_strncmp.c \
+	src/libft/ft_putnbr.c
 
 OBJS = $(SRCS:.c=.o)
 
