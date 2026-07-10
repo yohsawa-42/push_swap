@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:54:54 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/06 19:23:56 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/10 15:50:25 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static int	get_max_bits(int size)
 
 int	radix_sort(t_context *context)
 {
-	int		i;
-	int		bit;
-	int		max_bits;
+	int	i;
+	int	bit;
+	int	max_bits;
 
 	max_bits = get_max_bits(context->a->size);
 	bit = 0;

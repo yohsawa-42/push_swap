@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:53:30 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/06 20:36:48 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/10 15:50:31 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ int	get_bench(int ac, char **av, t_context *context)
 
 int	main(int ac, char **av)
 {
-	t_stack			a;
-	t_stack			b;
-	t_context		context;
-	int				n;
-	t_benchmark		flag;
+	t_stack		a;
+	t_stack		b;
+	t_context	context;
+	int			n;
+	t_benchmark	flag;
 
 	if (ac == 1)
 		return (0);

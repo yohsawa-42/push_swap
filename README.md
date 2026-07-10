@@ -210,7 +210,6 @@ push_swap/
 
 - `ft_printf_err` は bench と error 表示用の最小 printf です。標準エラー出力へ出します。
 - `t_stack` 内のカウンタで各操作の回数を数え、`--bench` で表示します。
-- `rotate_and_push.c` には、指定位置を最短方向で top に回してから push する補助関数を置いています。
 
 ## Resources
 
