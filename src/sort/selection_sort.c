@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   selection_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:55:21 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/10 15:50:26 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/10 14:20:09 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	sort_three(t_context *context)
 		rra(context);
 }
 
-static int	find_pos(t_stack *a, int target)
+int	find_pos(t_stack *a, int target)
 {
 	int	i;
 

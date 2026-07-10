@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+         #
+#    By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/02 00:00:00 by yohsawa           #+#    #+#              #
-#    Updated: 2026/07/10 15:50:33 by yohsawa          ###   ########.fr        #
+#    Updated: 2026/07/10 14:24:32 by msumiji          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ SRCS = \
 	src/sort/radix_sort.c \
 	src/sort/chunk_sort.c \
 	src/operations/push.c \
-	src/operations/rotate_and_push.c \
 	src/operations/reverse_rotate.c \
 	src/operations/rotate.c \
 	src/operations/swap.c \

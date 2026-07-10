@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:11:10 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/10 15:50:24 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/10 15:07:56 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,28 @@ static void	push_chunk_to_b(t_context *context, int start, int end)
 	}
 }
 
-static int	find_pos(t_stack *stack, int target)
+static	void	rb_and_pa(t_context *context, int pos)
 {
-	int	pos;
+	int	steps;
 
-	pos = 0;
-	while (pos < stack->size)
+	steps = 0;
+	if (pos <= context->b->size / 2)
 	{
-		if (stack->data[pos] == target)
-			return (pos);
-		pos++;
+		while (steps < pos)
+		{
+			rb(context);
+			steps++;
+		}
 	}
-	return (-1);
+	else
+	{
+		while (steps < context->b->size - pos)
+		{
+			rrb(context);
+			steps++;
+		}
+	}
+	pa(context);
 }
 
 static void	b_to_a(t_context *context)
@@ -89,7 +99,7 @@ int	chunk_sort(t_context *context)
 	size = a->size;
 	chunk_size = get_chunk_size(size);
 	start = 0;
-	while (start < size)
+	while (start < size && !(is_sorted(a) && a->data[0] == size - a->size))
 	{
 		end = start + chunk_size;
 		if (end > size)

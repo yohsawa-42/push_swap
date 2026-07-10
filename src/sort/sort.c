@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/10 15:50:27 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/10 15:51:35 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,13 @@ int	sort_stack(t_context *context)
 	flag->disorder = compute_disorder(context->a);
 	if (!compress_stack(context->a))
 		return (0);
-	if (context->a->size <= 5)
-	{
-		flag->simple = 1;
-		return (selection_sort(context));
-	}
-	else if (flag->simple)
+	//if (context->a->size <= 5)
+	//{
+	//	flag->simple = 1;
+	//	return (selection_sort(context));
+	//}
+	//else
+	if (flag->simple)
 		return (selection_sort(context));
 	else if (flag->medium)
 		return (chunk_sort(context));
