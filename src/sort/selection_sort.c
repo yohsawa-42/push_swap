@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   selection_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:55:21 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/10 14:20:09 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/10 16:19:20 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,6 @@ static void	sort_three(t_context *context)
 	}
 	else if (a->data[0] < a->data[1] && a->data[0] > a->data[2])
 		rra(context);
-}
-
-int	find_pos(t_stack *a, int target)
-{
-	int	i;
-
-	i = 0;
-	while (i < a->size)
-	{
-		if (a->data[i] == target)
-			return (i);
-		i++;
-	}
-	return (-1);
 }
 
 static void	rotate_target_to_top(t_context *context, int target)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:11:10 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/10 15:07:56 by msumiji          ###   ########.fr       */
+/*   Updated: 2026/07/10 16:21:50 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	push_chunk_to_b(t_context *context, int start, int end)
 	}
 }
 
-static	void	rb_and_pa(t_context *context, int pos)
+static void	rb_and_pa(t_context *context, int pos)
 {
 	int	steps;
 

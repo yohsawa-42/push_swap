@@ -86,6 +86,18 @@ selector を省略した場合も adaptive として動きます。要素数が 
 
 ## Algorithms
 
+### 課題要件と選定理由
+
+この課題では、以下の3つの計算量クラスから少なくとも1つずつアルゴリズムを実装することが求められています。この実装では、それぞれのクラスに対して `selection_sort`, `chunk_sort`, `radix_sort` を選びました。
+
+| 要件 | この実装で選んだ方法 | 理由 |
+| --- | --- | --- |
+| Simple algorithm / `O(n^2)` | `selection_sort` | 最小値を探して別スタックへ送る処理が `push_swap` の操作に素直に対応し、実装と検証がしやすいためです。小さい入力やほぼ整列済みの入力では余分な分割やビット走査を避けられ、操作列も読みやすくなります。 |
+| Medium algorithm / `O(n√n)` | `chunk_sort` | 値域を `√n` 個程度の chunk に分けることで、単純な全探索より操作数を抑えられます。`push_swap` では配列のようにランダムアクセスできないため、範囲ごとに `pb`, `ra`, `rb` で仕分ける chunk-based sorting は2スタック構造と相性がよいです。 |
+| Complex algorithm / `O(n log n)` | `radix_sort` | 座標圧縮後の値をビットごとに処理でき、比較や再帰を使わずに `pb`, `pa`, `ra` だけで安定して実装できます。入力が大きい場合でも必要な走査回数が `log2(n)` 程度に収まるため、最悪ケースの見通しがよいです。 |
+
+この3つを用意することで、入力サイズや乱れ具合に応じて、単純で低コストな方法、中間的な chunk-based strategy、大きな入力でも安定する radix strategy を切り替えられるようにしています。
+
 ### 値を順位に変換
 
 ソート前に入力値を順位へ変換します。
@@ -123,7 +135,7 @@ compressed: 2   0 1
 計算量の見積もり:
 
 - 各 target について `find_pos` が最大 `O(n)`
-- それを n 回行うため探索だけで `O(n^2)`
+- それを `n` 回行うため探索だけで `O(n^2)`
 - 回転も各 target で最大 `O(n)` なので、操作数の上限も `O(n^2)`
 - 追加メモリは stack `b` を除けば `O(1)`
 
@@ -168,6 +180,7 @@ push_swap/
     │   └── ft_printf_err_utils.c
     ├── libft/
     │   ├── ft_atoi.c
+    │   ├── ft_putnbr.c
     │   ├── ft_split.c
     │   ├── ft_strdup.c
     │   ├── ft_strlen.c
@@ -197,25 +210,52 @@ push_swap/
 
 - `ft_printf_err` は bench と error 表示用の最小 printf です。標準エラー出力へ出します。
 - `t_stack` 内のカウンタで各操作の回数を数え、`--bench` で表示します。
-- `rotate_and_push.c` には、指定位置を最短方向で top に回してから push する補助関数を置いています。
 
 ## checker_linux
-　subjectに添付されているchecker linuxは以下のように使います。
-　まず、checker linuxをダウンロードし、push_swapの置かれているフォルダにコピーする。次に以下のコマンドで権限を付与する。
+
+subject に添付されている `checker_linux` を使うと、`push_swap` が出力した操作列を検証できます。
+
+### 準備
+
+`checker_linux` をダウンロードし、`push_swap` と同じディレクトリにコピーします。その後、実行権限を付与します。
+
+```sh
 chmod +x checker_linux
-以下のコマンドをターミナルで打つとプログラムが正常な場合OKが表示され、間違っているとKOが表示される。
+```
+
+### push_swap の出力を検証する
+
+`push_swap` の出力を `checker_linux` に渡します。
+
+```sh
 ARG="2 1 0"; ./push_swap $ARG | ./checker_linux $ARG
-また、以下のコマンドで操作が正しいかがわかる。
-./checker_linux 3 2 1
+```
+
+操作後のスタックが正しくソートされていれば `OK`、ソートされていなければ `KO` が表示されます。
+
+### 操作を手動で入力する
+
+`checker_linux` の実行後に操作を1行ずつ入力し、最後に `Ctrl+D` で入力を終了します。
+
+`OK` になる例:
+
+```txt
+$ ./checker_linux 3 2 1
 sa
 rra
 Ctrl+D
-この場合には操作が正しいのでOKと表示される。一方で
-./checker_linux 3 2 1
+OK
+```
+
+`KO` になる例:
+
+```txt
+$ ./checker_linux 3 2 1
 pb
 pa
 Ctrl+D
-とするとKOと表示されます。
+KO
+```
 
 ## Resources
 

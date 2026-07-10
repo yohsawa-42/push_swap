@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 16:48:40 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/06 20:36:34 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/10 16:20:05 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,18 @@ void	free_stack(t_stack *stack)
 		free(stack->data);
 	stack->data = NULL;
 	stack->size = 0;
+}
+
+int	find_pos(t_stack *a, int target)
+{
+	int	i;
+
+	i = 0;
+	while (i < a->size)
+	{
+		if (a->data[i] == target)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
