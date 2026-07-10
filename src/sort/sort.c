@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/10 16:16:48 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/10 16:39:05 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,7 @@ static int	adaptive_sort(t_context *context)
 	t_benchmark	*flag;
 
 	flag = context->flag;
-	if (context->a->size <= 5)
-	{
-		flag->simple = 1;
-		return (selection_sort(context));
-	}
-	else if (flag->disorder < 0.2)
+	if (flag->disorder < 0.2)
 	{
 		flag->simple = 1;
 		return (selection_sort(context));
