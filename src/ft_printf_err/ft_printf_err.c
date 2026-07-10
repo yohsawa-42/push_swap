@@ -6,7 +6,7 @@
 /*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 11:57:56 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/10 16:21:36 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/10 16:56:47 by yohsawa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ int	ft_printf_err(const char *fmt, ...)
 {
 	va_list	ap;
 	int		ret;
-	int		total;
 
 	if (!fmt)
 		return (-1);
 	va_start(ap, fmt);
-	total = 0;
 	while (*fmt)
 	{
 		if (*fmt == '%' && *(fmt + 1))
@@ -43,9 +41,8 @@ int	ft_printf_err(const char *fmt, ...)
 			ret = ft_putchar_err(*fmt);
 		if (ret < 0)
 			return (va_end(ap), -1);
-		total += ret;
 		fmt++;
 	}
 	va_end(ap);
-	return (total);
+	return (0);
 }
