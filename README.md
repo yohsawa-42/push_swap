@@ -112,7 +112,7 @@ compressed: 2   0 1
 ### 戦略の決定
 　引数に--simpleなどの指定があるときは優先的にその戦略にします。指定がないとき、あるいは引数に--adaptiveという指定があるときは、以下の手順で戦略を決定します。
 　まずdisorder metricを計算します。これは要素の中から２つの要素を取り出して、それが昇順になっているか調べます。disorder metricは昇順になっている組み合わせを全ての組み合わせで割ったものです。
-　引数が--simpleのとき、disorder metricが0.2未満のとき、あるいは要素数が5以下の場合は、selection sortで処理を行います。引数が--mediumのとき、あるいはdisorder metricが0.2以上0.5未満のときはchunk sortで処理を行います。引数が--complexのとき、あるいはdisorder metricが0.5以上のときは、radix sortで処理を行います。
+　引数が--simpleのとき、あるいはdisorder metricが0.2未満のときはselection sortで処理を行います。引数が--mediumのとき、あるいはdisorder metricが0.2以上0.5未満のときはchunk sortで処理を行います。引数が--complexのとき、あるいはdisorder metricが0.5以上のときは、radix sortで処理を行います。
 
 ### selection_sort small case / O(1)
 
