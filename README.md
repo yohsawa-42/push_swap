@@ -114,20 +114,6 @@ compressed: 2   0 1
 　まずdisorder metricを計算します。これは要素の中から２つの要素を取り出して、それが昇順になっているか調べます。disorder metricは昇順になっている組み合わせを全ての組み合わせで割ったものです。
 　引数が--simpleのとき、あるいはdisorder metricが0.2未満のときはselection sortで処理を行います。引数が--mediumのとき、あるいはdisorder metricが0.2以上0.5未満のときはchunk sortで処理を行います。引数が--complexのとき、あるいはdisorder metricが0.5以上のときは、radix sortで処理を行います。
 
-### selection_sort small case / O(1)
-
-`selection_sort.c` 内の、要素数 `2..5` 用の処理です。
-
-- `2`: 必要なら `sa`
-- `3`: 並びに応じて `sa`, `ra`, `rra`
-- `4..5`: 最小値を `b` に退避し、残り3個を整列して戻す
-
-計算量の見積もり:
-
-- 対象サイズが最大5なので、理論上は定数時間 `O(1)`
-- `find_min_pos` は線形探索ですが、最大5個に限定されます
-- 操作数も小さい定数個に収まります
-
 ### selection_sort / O(n^2)
 
 座標圧縮後の値が `0..n-1` であることを利用し、`0`, `1`, `2` ... の順に探して `b` へ送り、最後に `a` へ戻します。
