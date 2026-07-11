@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:11:10 by msumiji           #+#    #+#             */
-/*   Updated: 2026/07/10 16:21:50 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/11 11:16:08 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 static int	get_chunk_size(int size)
 {
@@ -28,12 +29,15 @@ static void	push_chunk_to_b(t_context *context, int start, int end)
 	t_stack	*b;
 	int		middle;
 	int		pushed;
+	int		size;
 
 	a = context->a;
 	b = context->b;
+	size = a->size + b->size;
 	middle = start + (end - start) / 2;
 	pushed = 0;
-	while (pushed < end - start)
+	while (pushed < end - start
+		&& !(is_sorted(a) && a->data[0] == size - a->size))
 	{
 		if (start <= a->data[0] && a->data[0] < end)
 		{
@@ -97,9 +101,11 @@ int	chunk_sort(t_context *context)
 
 	a = context->a;
 	size = a->size;
+	if (size <= 5)
+		return (selection_sort(context));
 	chunk_size = get_chunk_size(size);
 	start = 0;
-	while (start < size && !(is_sorted(a) && a->data[0] == size - a->size))
+	while (start < size)
 	{
 		end = start + chunk_size;
 		if (end > size)

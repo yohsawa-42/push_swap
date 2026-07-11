@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 18:54:54 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/10 16:21:51 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/11 10:14:48 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ static int	get_max_bits(int size)
 
 int	radix_sort(t_context *context)
 {
-	int	i;
-	int	bit;
-	int	max_bits;
+	int			i;
+	int			bit;
+	int			max_bits;
 
 	max_bits = get_max_bits(context->a->size);
 	bit = 0;
+	if (context->a->size <= 5)
+		return (selection_sort(context));
 	while (bit < max_bits)
 	{
 		i = 0;

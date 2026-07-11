@@ -214,7 +214,8 @@ chmod +x checker_linux
 `push_swap` の出力を `checker_linux` に渡します。
 
 ```sh
-ARG="2 1 0"; ./push_swap $ARG | ./checker_linux $ARG
+
+
 ```
 
 操作後のスタックが正しくソートされていれば `OK`、ソートされていなければ `KO` が表示されます。

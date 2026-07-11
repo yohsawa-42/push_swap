@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohsawa <yohsawa@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: msumiji <msumiji@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 00:00:00 by yohsawa           #+#    #+#             */
-/*   Updated: 2026/07/10 16:39:05 by yohsawa          ###   ########.fr       */
+/*   Updated: 2026/07/11 10:02:25 by msumiji          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ static double	compute_disorder(t_stack *a)
 static int	adaptive_sort(t_context *context)
 {
 	t_benchmark	*flag;
+	t_stack		*a;
 
 	flag = context->flag;
+	a = context->a;
 	if (flag->disorder < 0.2)
 	{
 		flag->simple = 1;
